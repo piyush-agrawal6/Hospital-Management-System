@@ -1,0 +1,124 @@
+#Maindiv {
+  /* border: 2px solid red; */
+  background-color: aliceblue;
+}
+
+.singleelementdiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 86%;
+  margin: auto;
+}
+.firstpartdiv {
+  display: flex;
+}
+
+.ChartDiv {
+  display: flex;
+  width: 90%;
+  /* border: 2px solid red; */
+  margin: auto;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  justify-content: space-evenly;
+}
+
+#apexchartsbasic-bar-two {
+  width: 37%;
+  border-radius: 1rem;
+  box-shadow: -1px 20px 29px -2px rgba(0, 0, 0, 0.58);
+  -webkit-box-shadow: -1px 20px 29px -2px rgb(183 183 183 / 58%);
+  align-items: center;
+  background-image: linear-gradient(to right, #31c7d89c, #1117d236);
+}
+
+#apexchartsbasic-bar {
+  width: 7%;
+  border-radius: 1rem;
+  box-shadow: -1px 20px 29px -2px rgba(0, 0, 0, 0.58);
+  -webkit-box-shadow: -1px 20px 29px -2px rgb(183 183 183 / 58%);
+  align-items: center;
+  background-image: linear-gradient(to right, #7e80f59c, #3238eb36);
+}
+
+/* chart work is progress  */
+.hidethis {
+  display: none;
+}
+.sixeightypx {
+  display: none;
+}
+
+/* Media Queries for Dashboard page  */
+
+@media only screen and (max-width: 1200px) {
+  .singleelementdiv {
+    width: 98%;
+    gap: 1rem;
+  }
+  .linechart {
+    width: 50%;
+    margin: auto;
+  }
+  .barchart {
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .firstpartdiv {
+    display: block;
+  }
+  .hidethis {
+    display: block;
+  }
+  .singleelementdiv {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 1rem;
+  }
+  .makesidebyside {
+    display: flex;
+    width: 98%;
+    margin: auto;
+  }
+  .nonhidethis {
+    display: none;
+  }
+  .ChartDiv {
+    display: block;
+    width: 100%;
+    margin: auto;
+    /* background-color: rgb(165, 165, 255); */
+  }
+  .linecharttwo {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin-right: 14rem;
+  }
+  .linechart {
+    width: 50%;
+    margin: auto;
+    margin-right: 14rem;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .makesidebyside {
+    display: block;
+    width: 98%;
+    margin: auto;
+  }
+  .sixeightypx {
+    display: block;
+  }
+  .hidethis {
+    display: none;
+  }
+  .ChartDiv {
+    display: none;
+  }
+}
