@@ -7,11 +7,10 @@ import Home from "../Pages/Home/Home";
 const AllRoutes = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Dashboard />}></Route>
       </Routes>
-      {/* <Footer /> */}
     </>
   );
 };
