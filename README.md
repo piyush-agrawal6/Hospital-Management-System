@@ -28,64 +28,61 @@ Start the server
 
 # Hospital Management System
 
-A brief description of what this project does and who it's for
-the project.
+This a software to control all the management related to a hospital , like admitting patient , booking bed , calling a ambulance , managing payment and more.
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+<img src="https://i.ibb.co/4WkwWc2/logo.png" width="500" height="190px">
 
 
 ## Tech Stack
 
 **Client:** 
 
-- **Javascript**
 - **React**
 - **Redux Thunk**
 - **Axios**
-- **Chakra-UI**
-- **JSON Server**
+- **Ant-Designs**
 
 **Server:**
 
-- **Javascript**
-- **React**
-- **Redux Thunk**
-- **Axios**
-- **Chakra-UI**
-- **JSON Server**
+- **Node Js**
+- **Mongo DB**
+- **Express Js**
+- **Render**
+- **JWT**
 
 
 ## 🔗 Links
+Client - https://brain-labs.netlify.app/
 
+Server - https://github.com/piyush-agrawal6/HMS-Backend
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Admin controls
+- CRUD Operations
+- Admit Patients
+- Payment
+- Appointment booking
 
 
 ## Screenshots
 
 
-1.Landing Page
+1.Dashboard
 
-This is our landing page 
-
-![App Screenshot](https://i.ibb.co/9hjs2jM/04-12-2022-14-03-10-REC.png)
-
-![App Screenshot](https://i.ibb.co/9hjs2jM/04-12-2022-14-03-10-REC.png)
+![App Screenshot](https://i.ibb.co/1K6N1Hk/21-12-2022-12-45-28-REC.png)
 
 
 ## Blog / Presentation
 
-Insert gif or link to demo
+Presentation -
+
+Blog -
 
 
 ## Team Members / Contributors
 
-- [@Piyush Agrawal](https://www.github.com/octokatherine)
-- [@Udhaya Prakash](https://www.github.com/octokatherine)
-- [@Rajendra Patel](https://www.github.com/octokatherine)
+- [@Piyush Agrawal](https://github.com/piyush-agrawal6)
+- [@Udhaya Prakash](https://github.com/udhai-20)
+- [@Rajendra Patel](https://github.com/centauricoder01)
 
