@@ -26,7 +26,7 @@ Start the server
 ```
 
 
-## Hospital Management System
+# Hospital Management System
 
 A brief description of what this project does and who it's for
 the project.
