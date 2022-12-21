@@ -36,9 +36,23 @@ the project.
 
 ## Tech Stack
 
-**Client:** React, Redux, TailwindCSS
+**Client:** 
 
-**Server:** Node, Express
+- **Javascript**
+- **React**
+- **Redux Thunk**
+- **Axios**
+- **Chakra-UI**
+- **JSON Server**
+
+**Server:**
+
+- **Javascript**
+- **React**
+- **Redux Thunk**
+- **Axios**
+- **Chakra-UI**
+- **JSON Server**
 
 
 ## 🔗 Links
