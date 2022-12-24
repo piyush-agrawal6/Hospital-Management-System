@@ -1,0 +1,8 @@
+.MainAppointment {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  border: 1px solid;
+}
