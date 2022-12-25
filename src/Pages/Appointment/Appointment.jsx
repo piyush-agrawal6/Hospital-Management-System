@@ -3,27 +3,47 @@ import { UserOutlined, MobileOutlined } from "@ant-design/icons";
 import { Button, DatePicker, Input, TimePicker, TreeSelect } from "antd";
 import { CiVirus } from "react-icons/ci";
 import { AiOutlineMail } from "react-icons/ai";
+import { CommonProblem } from "./MixedObjectData";
+import { DepartmentData } from "./MixedObjectData";
+import {
+  Psychiatrist,
+  Pediatrics,
+  Dermatology,
+  Pediatrician,
+  Neurologist,
+} from "./MixedObjectData";
+
 import "./Appointment.css";
 
 const Appointment = () => {
-  const treeData = [
-    {
-      title: "Node1",
-      value: "0-0",
-    },
-    {
-      title: "Node2",
-      value: "0-1",
-    },
-  ];
   const [value, setValue] = useState();
+  const [showenterProblem, setEnterProblem] = useState("none");
+  const [DepartmentValue, setDepartmentValue] = useState();
+  const [DoctorValue, setDoctorValue] = useState();
+  const [DoctorData, setDoctorData] = useState();
 
   const onProblemChange = (newValue) => {
     setValue(newValue);
+    if (newValue === "Other Problem") {
+      setEnterProblem("flex");
+    } else {
+      setEnterProblem("none");
+    }
   };
 
   const onDepartmentChange = (newValue) => {
-    setValue(newValue);
+    setDepartmentValue(newValue);
+    if (newValue === "Psychiatrist") {
+      setDoctorValue(Psychiatrist);
+    } else if (newValue === "Pediatrics") {
+      setDoctorValue(Pediatrics);
+    } else if (newValue === "Dermatology") {
+      setDoctorValue(Dermatology);
+    } else if (newValue === "Pediatrician") {
+      setDoctorValue(Pediatrician);
+    } else if (newValue === "Neurologist") {
+      setDoctorValue(Neurologist);
+    }
   };
 
   const onDateChange = (date, dateString) => {
@@ -32,6 +52,7 @@ const Appointment = () => {
 
   const onDoctorChange = (newValue) => {
     console.log(newValue);
+    setDoctorData(newValue);
   };
 
   const format = "HH:mm";
@@ -77,7 +98,7 @@ const Appointment = () => {
             style={{ width: "100%" }}
             value={value}
             dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            treeData={treeData}
+            treeData={CommonProblem}
             placeholder="Choose your problem"
             treeDefaultExpandAll
             onChange={onProblemChange}
@@ -85,18 +106,20 @@ const Appointment = () => {
         </div>
         {/* ENTER SAMPLE DISEASE */}
         <Input
+          className="ChangeDisplayProblem"
           size="large"
           placeholder="Enter Your Problem"
           prefix={<CiVirus className="site-form-item-icon" />}
           type="text"
+          style={{ display: showenterProblem }}
         />
         {/* DEPARTMENT SECTION */}
         <div className="DepartmentSection">
           <TreeSelect
             style={{ width: "100%" }}
-            value={value}
+            value={DepartmentValue}
             dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            treeData={treeData}
+            treeData={DepartmentData}
             placeholder="Choose your Department"
             treeDefaultExpandAll
             onChange={onDepartmentChange}
@@ -106,9 +129,9 @@ const Appointment = () => {
         <div className="DepartmentSection">
           <TreeSelect
             style={{ width: "100%" }}
-            value={value}
+            value={DoctorData}
             dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            treeData={treeData}
+            treeData={DoctorValue}
             placeholder="Choose Doctor"
             treeDefaultExpandAll
             onChange={onDoctorChange}
@@ -125,7 +148,7 @@ const Appointment = () => {
         {/* EMAIL PART  */}
         <Input
           size="large"
-          placeholder="Enter your age"
+          placeholder="Enter your email"
           prefix={<AiOutlineMail className="site-form-item-icon" />}
           type="email"
         />

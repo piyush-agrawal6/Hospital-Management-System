@@ -46,3 +46,7 @@ form {
   gap: 10px;
   align-items: center;
 }
+
+.ChangeDisplayProblem {
+  border: 2px solid;
+}
