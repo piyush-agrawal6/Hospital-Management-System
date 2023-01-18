@@ -1,13 +1,12 @@
 import "./App.css";
-import Appointment from "./Pages/Appointment/Appointment";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import DLogin from "./Pages/Dashboard/Dashboard-Login/DLogin";
 import AllRoutes from "./Routes/AllRoutes";
 
 function App() {
   return (
     <>
-      <AllRoutes />
-      {/* <Appointment /> */}
+      {/* <AllRoutes /> */}
+      <DLogin />
     </>
   );
 }
