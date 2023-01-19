@@ -7,9 +7,10 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { SlUserFollow } from "react-icons/sl";
 import { BsBookmarkPlus, BsFillBookmarkCheckFill } from "react-icons/bs";
 import { BiDetail } from "react-icons/bi";
-import { CgDetailsMore, CgProfile } from "react-icons/cg";
+import { CgProfile } from "react-icons/cg";
 import { FaHospitalUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { TbListDetails } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
@@ -59,8 +60,8 @@ const Sidebar = ({ children }) => {
     },
     {
       path: "/patientdetails",
-      name: "Create Slip",
-      icons: <CgDetailsMore className="mainIcon" />,
+      name: "Patient Det",
+      icons: <TbListDetails className="mainIcon" />,
     },
     // ****************************
     {
@@ -82,7 +83,7 @@ const Sidebar = ({ children }) => {
   return (
     <>
       <div className="container">
-        <div style={{ width: isOpen ? "200px" : "80px" }} className="sidebar">
+        <div style={{ width: isOpen ? "300px" : "80px" }} className="sidebar">
           <div className="top_section">
             <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
               Logo
