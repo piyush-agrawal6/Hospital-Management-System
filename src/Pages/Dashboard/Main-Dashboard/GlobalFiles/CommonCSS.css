@@ -1,0 +1,77 @@
+.MainDiv {
+  display: flex;
+  border: 2px solid red;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+}
+
+.IconsDiv {
+  display: flex;
+  gap: 10px;
+}
+.Icons {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* **********************   Sidebar css ************************* */
+
+.container {
+  display: flex;
+}
+main {
+  width: 100%;
+  padding: 20px;
+}
+
+.mainIcon {
+  color: white;
+  font-size: 2rem;
+}
+
+.sidebar {
+  background: rgb(245, 168, 168);
+  color: #fff;
+  height: fit-content;
+  width: 200px;
+  transition: all 0.5s;
+}
+.top_section {
+  display: flex;
+  align-items: center;
+  padding: 20px 15px;
+  justify-content: center;
+}
+.logo {
+  font-size: 30px;
+}
+.bars {
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+.link {
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  text-decoration: none;
+  list-style: none;
+  /* justify-content: space-between; */
+  align-items: center;
+  transition: all 0.5s;
+}
+.link:hover {
+  background: rgb(250, 114, 114);
+  color: #000;
+  transition: all 0.5s;
+}
+.active {
+  background: rgb(250, 114, 114);
+  color: #000;
+}
+.icon,
+.link_text {
+  font-size: 15px;
+}
