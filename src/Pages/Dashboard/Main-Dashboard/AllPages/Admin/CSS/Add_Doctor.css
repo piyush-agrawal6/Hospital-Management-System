@@ -1,0 +1,10 @@
+.Main_Add_Doctor_div {
+  border: 1px solid;
+}
+
+form div {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border: 1px solid;
+}

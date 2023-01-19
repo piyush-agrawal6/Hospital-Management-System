@@ -1,6 +1,5 @@
 import { Table } from "antd";
 import React from "react";
-import Topbar from "./Topbar";
 
 const FrontPage = () => {
   const columns = [
@@ -48,7 +47,6 @@ const FrontPage = () => {
 
   return (
     <>
-      <Topbar />
       <div className="maindiv">
         <div className="one commondiv">Doctor</div>
         <div className="two commondiv">Nurse</div>
@@ -59,7 +57,7 @@ const FrontPage = () => {
       </div>
       {/* ************************************* */}
       <div className="patientDetails">
-        <h1>Patient Details </h1>
+        <h1>Doctors Detail </h1>
         <div className="patientBox">
           <Table columns={columns} dataSource={data} />
         </div>

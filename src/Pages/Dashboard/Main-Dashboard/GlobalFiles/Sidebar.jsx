@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { RiAdminLine } from "react-icons/ri";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaAmbulance } from "react-icons/fa";
 import { GiNurseFemale } from "react-icons/gi";
@@ -12,16 +11,19 @@ import { FaHospitalUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbListDetails } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
+import Topbar from "./Topbar";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const [hidesidebar, sethidesidebar] = useState("showsidebar");
+  function toggle() {
+    setIsOpen(!isOpen);
+    sethidesidebar(
+      hidesidebar === "showsidebar" ? "hidesidebar" : "showsidebar"
+    );
+  }
+  // const toggle = () =>
   const MenuItem = [
-    {
-      path: "/adminprofile",
-      name: "Admin Profile",
-      icons: <RiAdminLine className="mainIcon" />,
-    },
     {
       path: "/addoctor",
       name: "Add Doctor",
@@ -82,19 +84,12 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <>
+      <Topbar onclick={toggle} />
       <div className="container">
-        <div style={{ width: isOpen ? "300px" : "80px" }} className="sidebar">
-          <div className="top_section">
-            <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
-              Logo
-            </h1>
-            <div
-              style={{ marginLeft: isOpen ? "50px" : "0px" }}
-              className="bars"
-            >
-              <GiHamburgerMenu onClick={toggle} />
-            </div>
-          </div>
+        <div
+          style={{ width: isOpen ? "300px" : "80px" }}
+          className={`sidebar ${hidesidebar}`}
+        >
           {MenuItem.map((item, index) => (
             <NavLink
               to={item.path}

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Add_Ambulance from "./AllPages/Admin/Add_Ambulance";
 import AddDoctor from "./AllPages/Admin/Add_Doctor";
 import Add_Nurse from "./AllPages/Admin/Add_Nurse";
-import Admin_Profile from "./AllPages/Admin/Admin_Profile";
 import Check_Payment from "./AllPages/Admin/Check_Payment";
 import Check_Appointment from "./AllPages/Doctor/Check_Appointment";
 import Discharge_and_Create_Slip from "./AllPages/Doctor/Discharge_and_Create_Slip";
@@ -25,7 +24,6 @@ const Dashboard_Routers = () => {
           <Route path="/addoctor" element={<AddDoctor />} />
           <Route path="/addambulance" element={<Add_Ambulance />} />
           <Route path="/addnurse" element={<Add_Nurse />} />
-          <Route path="/adminprofile" element={<Admin_Profile />} />
           <Route path="/checkpayment" element={<Check_Payment />} />
           ******************** Doctor Part *************************
           <Route path="/checkappointment" element={<Check_Appointment />} />
