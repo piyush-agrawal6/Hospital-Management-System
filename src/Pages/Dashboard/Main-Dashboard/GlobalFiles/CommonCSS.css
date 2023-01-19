@@ -1,24 +1,29 @@
+/* *********************************  TOP BAR STYLE PART  ****************************************/
+
 .MainDiv {
   display: flex;
-  border: 2px solid red;
   justify-content: space-between;
   padding: 10px;
   align-items: center;
+  gap: 1rem;
 }
 
 .IconsDiv {
   display: flex;
   gap: 10px;
 }
+
 .Icons {
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
+  color: rgb(245, 168, 168);
 }
 
-/* **********************   Sidebar css ************************* */
+/* **********************   SIDEBAR STYLE PART  ************************* */
 
 .container {
   display: flex;
+  gap: 2rem;
 }
 main {
   width: 100%;
@@ -36,6 +41,8 @@ main {
   height: fit-content;
   width: 200px;
   transition: all 0.5s;
+  position: sticky;
+  top: 0;
 }
 .top_section {
   display: flex;
@@ -58,7 +65,6 @@ main {
   gap: 15px;
   text-decoration: none;
   list-style: none;
-  /* justify-content: space-between; */
   align-items: center;
   transition: all 0.5s;
 }
@@ -74,4 +80,52 @@ main {
 .icon,
 .link_text {
   font-size: 15px;
+}
+
+/**************************************** FRONT PAGE STYLE  *****************************************/
+
+.maindiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.commondiv {
+  border: 2px solid;
+  height: 8rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.patientDetails {
+  margin-top: 5rem;
+}
+.patientDetails h1 {
+  text-align: center;
+}
+
+.patientBox {
+  border: 2px solid red;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.patientBox p {
+  border: 1px solid;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .maindiv {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .maindiv {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
