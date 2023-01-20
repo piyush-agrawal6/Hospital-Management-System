@@ -31,9 +31,9 @@ const Dashboard_Routers = () => {
           <Route path="/patientdetails" element={<Patient_Details />} />
           <Route path="/doctorprofile" element={<Doctor_Profile />} />
           ******************** Nurse Part *************************
-          <Route path="/addpatient" element={Add_Patient} />
-          <Route path="/bookappointment" element={Book_Appointment} />
-          <Route path="/nurseprofile" element={Nurse_Profile} />
+          <Route path="/addpatient" element={<Add_Patient />} />
+          <Route path="/bookappointment" element={<Book_Appointment />} />
+          <Route path="/nurseprofile" element={<Nurse_Profile />} />
         </Routes>
       </Sidebar>
     </div>

@@ -52,6 +52,7 @@
 .container {
   display: flex;
   gap: 2rem;
+  background-color: rgba(196, 235, 251, 0.29);
 }
 main {
   width: 100%;

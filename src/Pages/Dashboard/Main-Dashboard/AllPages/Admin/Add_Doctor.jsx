@@ -1,10 +1,12 @@
 import React from "react";
 import "./CSS/Add_Doctor.css";
+import doctor from "../../../../../img/doctoravatar.png";
 
 const AddDoctor = () => {
   return (
     <div className="Main_Add_Doctor_div">
       <h1>Add Doctors</h1>
+      <img src={doctor} alt="doctor" className="avatarimg" />
       <form>
         <div>
           <label>Doctor Name</label>
@@ -93,7 +95,7 @@ const AddDoctor = () => {
           </div>
         </div>
         <div>
-          <label>Password ID</label>
+          <label>Password</label>
           <div className="inputdiv">
             <input type="text" placeholder="Password" />
           </div>
