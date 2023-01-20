@@ -1,0 +1,39 @@
+.mainAmbupance {
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 1px 11px 2px #0000001f;
+}
+
+.mainAmbupance h1 {
+  font-size: 2.5rem;
+}
+
+.imagesection {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3rem 0rem;
+}
+
+.imagesection img {
+  width: 20%;
+  cursor: pointer;
+  border: 1px solid;
+  height: 10rem;
+  padding: 13px;
+  border-radius: 10px;
+  background-color: #c3c7ff75;
+  border: none;
+  box-shadow: 0px 0px 7px -3px black;
+  transition: 0.3s;
+}
+
+.imagesection img:hover {
+  width: 22%;
+}
+
+.mainAmbupance h1 {
+  text-align: center;
+  margin: 2rem 0rem;
+}

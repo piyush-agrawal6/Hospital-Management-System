@@ -7,7 +7,7 @@
   padding: 10px 40px;
   align-items: center;
   gap: 1rem;
-  background-color: rgb(245, 168, 168);
+  background-color: rgba(255, 166, 134, 0.874);
   position: sticky;
   z-index: 100;
   top: 0;
@@ -64,7 +64,7 @@ main {
 }
 
 .sidebar {
-  background: rgb(245, 168, 168);
+  background: rgba(255, 166, 134, 0.874);
   color: #fff;
   height: 100vh;
   width: 300px;
@@ -97,12 +97,12 @@ main {
   transition: all 0.5s;
 }
 .link:hover {
-  background: rgb(250, 114, 114);
+  background: rgba(253, 147, 108, 0.874);
   color: #000;
   transition: all 0.5s;
 }
 .active {
-  background: rgb(250, 114, 114);
+  background: rgba(253, 147, 108, 0.874);
   color: #000;
 }
 .icon,
