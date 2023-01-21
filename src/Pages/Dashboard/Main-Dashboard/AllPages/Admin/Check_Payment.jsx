@@ -11,11 +11,6 @@ const Check_Payment = () => {
     { title: "Total Cost", dataIndex: "Total_Cost", key: "Total Cost" },
   ];
 
-  //   Patient name, id
-  // Date
-  // Doctor
-  // Report ref
-
   const data = [
     {
       key: 1,

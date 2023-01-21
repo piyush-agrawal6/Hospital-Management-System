@@ -1,89 +1,143 @@
 import React, { useState } from "react";
-import { UserOutlined, MobileOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Input, TimePicker, TreeSelect } from "antd";
-import { CiVirus } from "react-icons/ci";
-import { AiOutlineMail } from "react-icons/ai";
-import { CommonProblem } from "./MixedObjectData";
-import { DepartmentData } from "./MixedObjectData";
-import {
-  Psychiatrist,
-  Pediatrics,
-  Dermatology,
-  Pediatrician,
-  Neurologist,
-} from "./MixedObjectData";
-
-// import "./CSS/Appointment.css";
+import { message, Upload } from "antd";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import doctor from "../../../../../img/doctoravatar.png";
 
 const Add_Patient = () => {
-  const [value, setValue] = useState("");
-  const [showenterProblem, setEnterProblem] = useState("none");
-  const [DepartmentValue, setDepartmentValue] = useState();
-  const [DoctorValue, setDoctorValue] = useState();
-  const [DoctorData, setDoctorData] = useState();
+  const getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result));
+    reader.readAsDataURL(img);
+  };
 
-  const onProblemChange = (newValue) => {
-    console.log(newValue);
-    setValue(newValue);
-    if (newValue === "Other Problem") {
-      setEnterProblem("block");
-    } else {
-      setEnterProblem("none");
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error("Image must smaller than 2MB!");
+    }
+    return isJpgOrPng && isLt2M;
+  };
+
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+
+  const [BookAppoint, setBookAppoint] = useState({
+    name: "",
+    id: "",
+    age: "",
+    email: "",
+    gender: "",
+    number: "",
+    disease: "",
+    address: "",
+    department: "",
+    date: "",
+    password: "",
+  });
+
+  const HandleAppointment = (e) => {
+    setBookAppoint({ ...BookAppoint, [e.target.name]: e.target.value });
+  };
+
+  const HandleOnsubmitAppointment = (e) => {
+    e.preventDefault();
+    console.log(BookAppoint);
+  };
+
+  const handleChange = (info) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
     }
   };
 
-  const onDepartmentChange = (newValue) => {
-    setDepartmentValue(newValue);
-    if (newValue === "Psychiatrist") {
-      setDoctorValue(Psychiatrist);
-    } else if (newValue === "Pediatrics") {
-      setDoctorValue(Pediatrics);
-    } else if (newValue === "Dermatology") {
-      setDoctorValue(Dermatology);
-    } else if (newValue === "Pediatrician") {
-      setDoctorValue(Pediatrician);
-    } else if (newValue === "Neurologist") {
-      setDoctorValue(Neurologist);
-    }
-  };
-
-  const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
-  const onDoctorChange = (newValue) => {
-    console.log(newValue);
-    setDoctorData(newValue);
-  };
-
-  const format = "HH:mm";
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   return (
     <>
       <div className="Main_Add_Doctor_div">
-        <h1>Add A Patient</h1>
-        <form>
+        <h1>Add Patient</h1>
+        <img src={doctor} alt="doctor" className="avatarimg" />
+
+        <form onSubmit={HandleOnsubmitAppointment}>
+          {/* Id PlaceHolder */}
+          <div>
+            <label>Patient Id</label>
+            <div className="inputdiv">
+              <input
+                type="text"
+                placeholder="Id"
+                name="id"
+                value={BookAppoint.id}
+                onChange={HandleAppointment}
+              />
+            </div>
+          </div>
+
           {/* Name PlaceHolder */}
           <div>
             <label>Patient Name</label>
             <div className="inputdiv">
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
+              <input
+                type="text"
+                placeholder="Full Name"
+                name="name"
+                value={BookAppoint.name}
+                onChange={HandleAppointment}
+              />
             </div>
           </div>
-
           {/* AGE PLACEHOLDER  */}
           <div>
             <label>Age</label>
             <div className="inputdiv">
-              <input type="number" placeholder="Age" />
+              <input
+                type="number"
+                placeholder="Age"
+                name="age"
+                value={BookAppoint.age}
+                onChange={HandleAppointment}
+              />
+            </div>
+          </div>
+          {/* EMAIL PLACEHOLDER  */}
+          <div>
+            <label>Email</label>
+            <div className="inputdiv">
+              <input
+                type="email"
+                placeholder="abc@abc.com"
+                name="email"
+                value={BookAppoint.email}
+                onChange={HandleAppointment}
+              />
             </div>
           </div>
           {/* GENDER PLACEHOLDER  */}
           <div>
             <label>Gender</label>
             <div className="inputdiv">
-              <select>
+              <select
+                name="gender"
+                value={BookAppoint.gender}
+                onChange={HandleAppointment}
+              >
                 <option value="Choose Blood Group">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -91,81 +145,91 @@ const Add_Patient = () => {
               </select>
             </div>
           </div>
+          {/* DATE OF BIRTH  */}
+          <div className="dateofAppointment">
+            <p>Birth Date</p>
+            <div className="inputdiv">
+              <input
+                type={"date"}
+                placeholder="Choose Date"
+                name="date"
+                value={BookAppoint.date}
+                onChange={HandleAppointment}
+              />
+            </div>
+          </div>
           {/* MOBILE PLACEHOLDER */}
           <div>
             <label>Contact Number</label>
             <div className="inputdiv">
-              <input type="number" placeholder="Number" />
-            </div>
-          </div>
-          {/* PROBLEM PLACEHOLDER */}
-          <div>
-            <label>Type of Disease</label>
-            <div className="inputdiv">
-              <select value={value} onChange={onProblemChange}>
-                <option value="Choose Blood Group">Select Disease</option>
-                {CommonProblem.map((ele, i) => {
-                  return (
-                    <option key={i} value={ele.title}>
-                      {ele.title}
-                    </option>
-                  );
-                })}
-              </select>
+              <input
+                type="number"
+                placeholder="Number"
+                name="number"
+                value={BookAppoint.number}
+                onChange={HandleAppointment}
+              />
             </div>
           </div>
 
-          {/* ENTER SAMPLE DISEASE */}
-          <Input
-            className="ChangeDisplayProblem"
-            size="large"
-            placeholder="Enter Your Problem"
-            prefix={<CiVirus className="site-form-item-icon" />}
-            type="text"
-            style={{ display: showenterProblem }}
-          />
-          {/* DEPARTMENT SECTION */}
-          <div className="DepartmentSection">
-            <TreeSelect
-              style={{ width: "100%" }}
-              value={DepartmentValue}
-              dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-              treeData={DepartmentData}
-              placeholder="Choose your Department"
-              treeDefaultExpandAll
-              onChange={onDepartmentChange}
-            />
-          </div>
-          {/* DOCTOR SECTION */}
-          <div className="DepartmentSection">
-            <TreeSelect
-              style={{ width: "100%" }}
-              value={DoctorData}
-              dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-              treeData={DoctorValue}
-              placeholder="Choose Doctor"
-              treeDefaultExpandAll
-              onChange={onDoctorChange}
-            />
-          </div>
-          {/* APPOINTMENT DATE  */}
-          <div className="dateofAppointment">
-            <p>Date and Time of Appointment:</p>
-            <div>
-              <DatePicker onChange={onDateChange} />
-              <TimePicker format={format} />
+          {/* ADDRESS SECTION  */}
+          <div>
+            <label>Address</label>
+            <div className="inputdiv">
+              <input
+                type="text"
+                placeholder="Address line 1"
+                name="address"
+                value={BookAppoint.address}
+                onChange={HandleAppointment}
+              />
             </div>
           </div>
-          {/* EMAIL PART  */}
-          <Input
-            size="large"
-            placeholder="Enter your email"
-            prefix={<AiOutlineMail className="site-form-item-icon" />}
-            type="email"
-          />
-          <Button type="primary" className="SubmitButton" block>
-            Book Appointment
-          </Button>
+
+          {/* PASSWORD*/}
+          <div className="dateofAppointment">
+            <p>Password</p>
+            <div className="inputdiv">
+              <input
+                type={"text"}
+                placeholder="Password"
+                name="password"
+                value={BookAppoint.password}
+                onChange={HandleAppointment}
+              />
+            </div>
+          </div>
+          {/* ADD IMAGES  */}
+          <div>
+            <label>Image</label>
+            <div className="inputdiv">
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+                style={{ display: "block" }}
+              >
+                {imageUrl ? (
+                  <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+                ) : (
+                  uploadButton
+                )}
+              </Upload>
+            </div>
+          </div>
+          {/* SUBMIT BUTTON  */}
+
+          <button
+            type="submit"
+            className="formsubmitbutton"
+            style={{ width: "20%" }}
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>

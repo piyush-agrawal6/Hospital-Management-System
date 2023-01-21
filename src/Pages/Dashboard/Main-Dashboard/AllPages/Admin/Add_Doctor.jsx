@@ -26,6 +26,7 @@ const AddDoctor = () => {
 
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+
   const [DoctorValue, setDoctorValue] = useState({
     name: "",
     age: "",
