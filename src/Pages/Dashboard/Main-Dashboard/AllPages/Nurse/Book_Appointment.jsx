@@ -1,12 +1,7 @@
 import React from "react";
-import "./CSS/Book_appointment.css";
 
 const Book_Appointment = () => {
-  return (
-    <div>
-      <h1>Book Appointment</h1>
-    </div>
-  );
+  return <div>Book_Appointment</div>;
 };
 
 export default Book_Appointment;

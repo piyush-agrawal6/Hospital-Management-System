@@ -115,7 +115,7 @@ main {
 
 .maindiv {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -131,7 +131,8 @@ main {
   margin-top: 5rem;
 }
 .patientDetails h1 {
-  text-align: center;
+  margin-bottom: 1rem;
+  color: rgb(184 191 234);
 }
 
 .patientBox {
@@ -140,18 +141,44 @@ main {
   overflow-y: hidden;
   white-space: nowrap;
   width: 100%;
+  background-color: white;
+  border-radius: 1rem;
+  border: none;
+  box-shadow: 0px 0px 36px -3px #00000026;
 }
 
-.patientBox p {
-  border: 1px solid;
-  margin-top: 2rem;
+.commondiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  box-shadow: 0px 0px 36px -3px #00000026;
+  border: none;
+  background-color: white;
+}
+
+.overviewIcon {
+  font-size: 4rem;
+  color: rgb(184 191 234);
 }
 
 /* ******************************************************** */
 
+@media only screen and (max-width: 1200px) {
+  .maindiv {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .commondiv {
+    gap: 2.5rem;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .maindiv {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .commondiv {
+    gap: 4rem;
   }
 }
 

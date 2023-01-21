@@ -5,6 +5,7 @@
   border-radius: 10px;
   width: 95%;
   box-shadow: 0px 1px 11px 2px #0000001f;
+  background-color: white;
 }
 
 .Main_Add_Doctor_div h1 {
@@ -30,7 +31,8 @@ form div {
 }
 
 form input,
-select {
+select,
+textarea {
   width: 100%;
   background-color: rgba(178, 219, 250, 0.874);
   height: 3rem;
@@ -71,4 +73,8 @@ input::-webkit-inner-spin-button {
 
 .formsubmitbutton:hover {
   background: #f98e67;
+}
+
+.inputdiv span div {
+  display: block;
 }
