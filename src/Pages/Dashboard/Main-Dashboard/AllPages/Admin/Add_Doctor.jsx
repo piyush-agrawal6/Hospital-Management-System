@@ -34,7 +34,8 @@ const AddDoctor = () => {
     blood: "",
     gender: "",
     dob: "",
-    address: "",
+    addressone: "",
+    addresstwo: "",
     education: "",
     speciality: "",
     Id: "",
@@ -179,15 +180,15 @@ const AddDoctor = () => {
             <input
               type="text"
               placeholder="Address line 1"
-              name="address"
-              value={DoctorValue.address}
+              name="addressone"
+              value={DoctorValue.addressone}
               onChange={HandleDoctorChange}
             />
             <input
               type="text"
               placeholder="Address line 2"
-              name="address"
-              value={DoctorValue.address}
+              name="addresstwo"
+              value={DoctorValue.addresstwo}
               onChange={HandleDoctorChange}
             />
           </div>

@@ -6,6 +6,28 @@ import "./CSS/Add_Ambu.css";
 
 const Add_Ambulance = () => {
   let [ambuType, setambuType] = useState("");
+
+  const [AmbuData, setAmbuDate] = useState({
+    AmbulanceType: ambuType,
+    charges: "",
+    code: "",
+    driver: "",
+    driverNumber: "",
+  });
+
+  const HandleAmbuChange = (e) => {
+    setAmbuDate({
+      ...AmbuData,
+      [e.target.name]: e.target.value,
+      AmbulanceType: ambuType,
+    });
+  };
+
+  const HandleAmbuSubmit = (e) => {
+    e.preventDefault();
+    console.log(AmbuData);
+  };
+
   return (
     <>
       <div className="mainAmbupance">
@@ -28,7 +50,7 @@ const Add_Ambulance = () => {
           />
         </div>
         {/* ******************************************************** */}
-        <form>
+        <form onSubmit={HandleAmbuSubmit}>
           <div>
             <label>Ambulance Type</label>
             <div className="inputdiv">
@@ -38,25 +60,49 @@ const Add_Ambulance = () => {
           <div>
             <label>Price per Hours</label>
             <div className="inputdiv">
-              <input type="text" placeholder="eg.200/-" />
+              <input
+                type="text"
+                placeholder="eg.200/-"
+                name="charges"
+                value={AmbuData.charges}
+                onChange={HandleAmbuChange}
+              />
             </div>
           </div>
           <div>
             <label>Ambulance Code</label>
             <div className="inputdiv">
-              <input type="number" placeholder="eg.EVB36A" />
+              <input
+                type="text"
+                placeholder="eg.EVB36A"
+                name="code"
+                value={AmbuData.code}
+                onChange={HandleAmbuChange}
+              />
             </div>
           </div>
           <div>
             <label>Driver Name</label>
             <div className="inputdiv">
-              <input type="number" placeholder="Name" />
+              <input
+                type="text"
+                placeholder="Name"
+                name="driver"
+                value={AmbuData.driver}
+                onChange={HandleAmbuChange}
+              />
             </div>
           </div>
           <div>
             <label>Driver Contact No</label>
             <div className="inputdiv">
-              <input type="number" placeholder="Contact No" />
+              <input
+                type="number"
+                placeholder="Contact No"
+                name="driverNumber"
+                value={AmbuData.driverNumber}
+                onChange={HandleAmbuChange}
+              />
             </div>
           </div>
           <button type="submit" className="formsubmitbutton">
