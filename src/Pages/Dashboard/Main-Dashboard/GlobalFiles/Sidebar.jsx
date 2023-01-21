@@ -53,11 +53,11 @@ const Sidebar = ({ children }) => {
     {
       path: "/checkappointment",
       name: "Check Appt",
-      icons: <BsBookmarkPlus className="mainIcon" />,
+      icons: <BsFillBookmarkCheckFill className="mainIcon" />,
     },
     {
       path: "/createslip",
-      name: "Create Slip",
+      name: "Create Report",
       icons: <BiDetail className="mainIcon" />,
     },
     {
@@ -79,7 +79,7 @@ const Sidebar = ({ children }) => {
     {
       path: "/bookappointment",
       name: "Book Appt",
-      icons: <BsFillBookmarkCheckFill className="mainIcon" />,
+      icons: <BsBookmarkPlus className="mainIcon" />,
     },
   ];
   return (
