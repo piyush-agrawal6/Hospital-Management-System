@@ -10,6 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaHospitalUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbListDetails } from "react-icons/tb";
+import { MdBedroomChild } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import Topbar from "./Topbar";
 
@@ -43,6 +44,11 @@ const Sidebar = ({ children }) => {
       path: "/checkpayment",
       name: "Payment",
       icons: <RiSecurePaymentLine className="mainIcon" />,
+    },
+    {
+      path: "/rooms",
+      name: "Beds and Rooms",
+      icons: <MdBedroomChild className="mainIcon" />,
     },
     // *************************
     {
@@ -84,7 +90,7 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <>
-      <Topbar onclick={toggle} />
+      {/* <Topbar onclick={toggle} /> */}
       <div className="container">
         <div
           style={{ width: isOpen ? "300px" : "80px" }}
