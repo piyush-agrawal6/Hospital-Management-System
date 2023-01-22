@@ -8,11 +8,10 @@ import { BsBookmarkPlus, BsFillBookmarkCheckFill } from "react-icons/bs";
 import { BiDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaHospitalUser } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { TbListDetails } from "react-icons/tb";
 import { MdBedroomChild } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import Topbar from "./Topbar";
+import { ImMenu } from "react-icons/im";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,28 +89,37 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <>
-      {/* <Topbar onclick={toggle} /> */}
       <div className="container">
-        <div
-          style={{ width: isOpen ? "300px" : "80px" }}
-          className={`sidebar ${hidesidebar}`}
-        >
-          {MenuItem.map((item, index) => (
-            <NavLink
-              to={item.path}
-              key={index}
-              className="link"
-              activeclassname="active"
+        <div style={{ width: isOpen ? "300px" : "80px" }} className={`sidebar`}>
+          <div className="top_section">
+            <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+              HMS
+            </h1>
+            <div
+              style={{ marginLeft: isOpen ? "50px" : "0px" }}
+              className="bars"
             >
-              <div className="icon">{item.icons}</div>
-              <div
-                style={{ display: isOpen ? "block" : "none" }}
-                className="link_text"
+              <ImMenu onClick={toggle} />
+            </div>
+          </div>
+          <div className="bottomSection">
+            {MenuItem.map((item, index) => (
+              <NavLink
+                to={item.path}
+                key={index}
+                className="link"
+                activeclassname="active"
               >
-                {item.name}
-              </div>
-            </NavLink>
-          ))}
+                <div className="icon">{item.icons}</div>
+                <div
+                  style={{ display: isOpen ? "block" : "none" }}
+                  className="link_text"
+                >
+                  {item.name}
+                </div>
+              </NavLink>
+            ))}
+          </div>
         </div>
         <main>{children}</main>
       </div>

@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import "./CSS/Payment.css";
 
 const Check_Payment = () => {
   const columns = [
@@ -82,7 +83,7 @@ const Check_Payment = () => {
       <div className="Payment_Page">
         <h1 style={{ marginBottom: "2rem" }}>All Payments</h1>
         <div className="patientBox">
-          <Table columns={columns} dataSource={data} />
+          <Table columns={columns} dataSource={data} className="PaymentTable" />
         </div>
       </div>
     </>

@@ -3,14 +3,14 @@
 .MainDiv {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 10px 40px;
   align-items: center;
   gap: 1rem;
-  background-color: rgba(255, 166, 134, 0.874);
-  position: sticky;
-  z-index: 100;
-  top: 0;
+  background-color: white;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px -3px rgb(101, 101, 101);
 }
 
 .IconsDiv {
@@ -18,6 +18,10 @@
   gap: 30px;
   justify-content: center;
   align-items: center;
+}
+
+.SearchDiv {
+  width: 60%;
 }
 
 .Icons {
@@ -29,10 +33,11 @@
 .SearchDiv input {
   width: 100%;
   height: 2.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   font-size: 1.2rem;
   padding-left: 10px;
+  background-color: rgb(253 176 149);
 }
 
 .Hideshow {
@@ -53,6 +58,7 @@
   display: flex;
   gap: 2rem;
   background-color: rgba(196, 235, 251, 0.29);
+  width: 100%;
 }
 main {
   width: 100%;
@@ -67,7 +73,7 @@ main {
 .sidebar {
   background: rgba(255, 166, 134, 0.874);
   color: #fff;
-  height: 100vh;
+  height: 100%;
   width: 300px;
   transition: all 0.5s;
   position: sticky;
@@ -79,6 +85,7 @@ main {
   padding: 20px 15px;
   justify-content: center;
 }
+
 .logo {
   font-size: 30px;
 }
@@ -172,18 +179,27 @@ main {
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 850px) {
   .maindiv {
     grid-template-columns: repeat(2, 1fr);
   }
   .commondiv {
     gap: 4rem;
   }
+  .container {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 550px) {
   .maindiv {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    gap: 10px;
   }
 }
 

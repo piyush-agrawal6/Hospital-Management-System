@@ -78,3 +78,48 @@ input::-webkit-inner-spin-button {
 .inputdiv span div {
   display: block;
 }
+
+@media only screen and (max-width: 1024px) {
+  .Main_Add_Doctor_div img {
+    width: 30%;
+  }
+  .formsubmitbutton {
+    width: 20%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .Main_Add_Doctor_div img {
+    width: 30%;
+  }
+  form div {
+    display: block;
+  }
+  .inputdiv {
+    width: 100%;
+  }
+  .Main_Add_Doctor_div {
+    padding: 1rem;
+  }
+  .adressdiv {
+    display: block;
+  }
+  .formsubmitbutton {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Main_Add_Doctor_div h1 {
+    font-size: 1.7rem;
+  }
+  .Main_Add_Doctor_div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .formsubmitbutton {
+    width: 50%;
+  }
+}

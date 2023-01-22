@@ -1,0 +1,16 @@
+.book_formsubmitbutton {
+  border: none;
+  padding: 1rem;
+  display: block;
+  margin: auto;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  border-radius: 10px;
+  background-color: #fdb095;
+}
+
+@media only screen and (max-width: 1024px) {
+  .book_formsubmitbutton {
+    width: 50%;
+  }
+}

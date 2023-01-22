@@ -105,7 +105,7 @@ const AddDoctor = () => {
           </div>
         </div>
         <div>
-          <label>Emergency Contact Number</label>
+          <label>Emergency Number</label>
           <div className="inputdiv">
             <input
               type="number"
@@ -177,7 +177,7 @@ const AddDoctor = () => {
         </div>
         <div>
           <label>Address</label>
-          <div className="inputdiv">
+          <div className="inputdiv adressdiv">
             <input
               type="text"
               placeholder="Address line 1"

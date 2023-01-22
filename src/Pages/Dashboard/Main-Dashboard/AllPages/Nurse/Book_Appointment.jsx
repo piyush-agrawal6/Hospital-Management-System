@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CommonProblem } from "./MixedObjectData";
+import "./CSS/Book_appointment.css";
 
 const Book_Appointment = () => {
   const [showenterProblem, setEnterProblem] = useState("none");
@@ -168,7 +169,7 @@ const Book_Appointment = () => {
           </div>
           {/* APPOINTMENT DATE  */}
           <div className="dateofAppointment">
-            <p>Date and Time of Appointment:</p>
+            <p>Date and Time </p>
             <div className="inputdiv">
               <input
                 type={"date"}
@@ -187,11 +188,7 @@ const Book_Appointment = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="formsubmitbutton"
-            style={{ width: "30%" }}
-          >
+          <button type="submit" className="book_formsubmitbutton">
             Book Appointment
           </button>
         </form>

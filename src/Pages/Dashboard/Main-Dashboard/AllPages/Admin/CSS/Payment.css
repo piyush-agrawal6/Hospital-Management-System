@@ -1,0 +1,8 @@
+.patientBox {
+  border: 2px solid red;
+}
+@media only screen and (max-width: 900px) {
+  .patientBox {
+    width: 80%;
+  }
+}

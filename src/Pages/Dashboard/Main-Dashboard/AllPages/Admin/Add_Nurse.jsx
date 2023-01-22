@@ -154,7 +154,7 @@ const Add_Nurse = () => {
         </div>
         <div>
           <label>Address</label>
-          <div className="inputdiv">
+          <div className="inputdiv adressdiv">
             <input
               type="text"
               placeholder="Address line 1"
