@@ -59,11 +59,11 @@
   gap: 2rem;
   background-color: rgba(196, 235, 251, 0.29);
   width: 100%;
-  border: 2px solid green;
+  /* border: 2px solid green; */
   width: 100%;
 }
 main {
-  width: 80%;
+  width: 100%;
   padding: 20px;
 }
 
@@ -117,6 +117,10 @@ main {
 .icon,
 .link_text {
   font-size: 15px;
+}
+
+.LogOutPath .icon {
+  font-size: 2rem;
 }
 
 /**************************************** FRONT PAGE STYLE  *****************************************/

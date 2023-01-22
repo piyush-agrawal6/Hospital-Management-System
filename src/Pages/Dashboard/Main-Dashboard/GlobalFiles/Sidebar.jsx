@@ -12,6 +12,7 @@ import { TbListDetails } from "react-icons/tb";
 import { MdBedroomChild } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
+import { FiLogOut } from "react-icons/fi";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +83,7 @@ const Sidebar = ({ children }) => {
     },
   ];
 
-  const [StaffStatus, setStaffStatus] = useState(NurseRoutes);
+  const [StaffStatus, setStaffStatus] = useState(AdminRoutes);
 
   function toggle() {
     setIsOpen(!isOpen);
@@ -91,7 +92,7 @@ const Sidebar = ({ children }) => {
   return (
     <>
       <div className="container">
-        <div style={{ width: isOpen ? "200px" : "70px" }} className={`sidebar`}>
+        <div style={{ width: isOpen ? "300px" : "70px" }} className={`sidebar`}>
           <div className="top_section">
             <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
               HMS
@@ -120,6 +121,17 @@ const Sidebar = ({ children }) => {
                 </div>
               </NavLink>
             ))}
+            <NavLink to={"/login"} className="LogOutPath link">
+              <div className="icon">
+                <FiLogOut />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                Logout
+              </div>
+            </NavLink>
           </div>
         </div>
         <main>{children}</main>
