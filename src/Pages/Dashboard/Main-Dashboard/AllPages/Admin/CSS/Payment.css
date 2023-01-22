@@ -1,8 +1,11 @@
-.patientBox {
-  border: 2px solid red;
-}
 @media only screen and (max-width: 900px) {
   .patientBox {
-    width: 80%;
+    width: 60%;
+    border: 2px solid;
+  }
+
+  .Payment_Page {
+    /* border: 1px solid blue; */
+    width: 30%;
   }
 }

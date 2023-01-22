@@ -15,15 +15,7 @@ import { ImMenu } from "react-icons/im";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hidesidebar, sethidesidebar] = useState("showsidebar");
-  function toggle() {
-    setIsOpen(!isOpen);
-    sethidesidebar(
-      hidesidebar === "showsidebar" ? "hidesidebar" : "showsidebar"
-    );
-  }
-  // const toggle = () =>
-  const MenuItem = [
+  const AdminRoutes = [
     {
       path: "/addoctor",
       name: "Add Doctor",
@@ -49,7 +41,8 @@ const Sidebar = ({ children }) => {
       name: "Beds and Rooms",
       icons: <MdBedroomChild className="mainIcon" />,
     },
-    // *************************
+  ];
+  const DoctorRoutes = [
     {
       path: "/doctorprofile",
       name: "Doctor Profile",
@@ -70,7 +63,8 @@ const Sidebar = ({ children }) => {
       name: "Patient Det",
       icons: <TbListDetails className="mainIcon" />,
     },
-    // ****************************
+  ];
+  const NurseRoutes = [
     {
       path: "/nurseprofile",
       name: "Nurse Profile",
@@ -87,10 +81,17 @@ const Sidebar = ({ children }) => {
       icons: <BsBookmarkPlus className="mainIcon" />,
     },
   ];
+
+  const [StaffStatus, setStaffStatus] = useState(NurseRoutes);
+
+  function toggle() {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <>
       <div className="container">
-        <div style={{ width: isOpen ? "300px" : "80px" }} className={`sidebar`}>
+        <div style={{ width: isOpen ? "200px" : "70px" }} className={`sidebar`}>
           <div className="top_section">
             <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
               HMS
@@ -99,11 +100,11 @@ const Sidebar = ({ children }) => {
               style={{ marginLeft: isOpen ? "50px" : "0px" }}
               className="bars"
             >
-              <ImMenu onClick={toggle} />
+              <ImMenu onClick={toggle} style={{ cursor: "pointer" }} />
             </div>
           </div>
           <div className="bottomSection">
-            {MenuItem.map((item, index) => (
+            {StaffStatus.map((item, index) => (
               <NavLink
                 to={item.path}
                 key={index}

@@ -59,9 +59,11 @@
   gap: 2rem;
   background-color: rgba(196, 235, 251, 0.29);
   width: 100%;
+  border: 2px solid green;
+  width: 100%;
 }
 main {
-  width: 100%;
+  width: 80%;
   padding: 20px;
 }
 
@@ -73,8 +75,7 @@ main {
 .sidebar {
   background: rgba(255, 166, 134, 0.874);
   color: #fff;
-  height: 100%;
-  width: 300px;
+  height: 100vh;
   transition: all 0.5s;
   position: sticky;
   top: 0;
