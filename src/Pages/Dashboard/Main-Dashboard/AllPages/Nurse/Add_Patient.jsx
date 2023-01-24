@@ -186,6 +186,19 @@ const Add_Patient = () => {
             </div>
           </div>
 
+          <div>
+            <label>Allocate</label>
+            <div className="inputdiv">
+              <input
+                type="text"
+                placeholder="Address line 1"
+                name="address"
+                value={BookAppoint.address}
+                onChange={HandleAppointment}
+              />
+            </div>
+          </div>
+
           {/* PASSWORD*/}
           <div className="dateofAppointment">
             <p>Password</p>

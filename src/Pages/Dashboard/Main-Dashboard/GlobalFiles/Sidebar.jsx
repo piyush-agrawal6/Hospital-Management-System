@@ -77,13 +77,18 @@ const Sidebar = ({ children }) => {
       icons: <FaHospitalUser className="mainIcon" />,
     },
     {
+      path: "/rooms",
+      name: "Beds and Rooms",
+      icons: <MdBedroomChild className="mainIcon" />,
+    },
+    {
       path: "/bookappointment",
       name: "Book Appt",
       icons: <BsBookmarkPlus className="mainIcon" />,
     },
   ];
 
-  const [StaffStatus, setStaffStatus] = useState(AdminRoutes);
+  const [StaffStatus, setStaffStatus] = useState(DoctorRoutes);
 
   function toggle() {
     setIsOpen(!isOpen);

@@ -116,10 +116,13 @@ input::-webkit-inner-spin-button {
   .Main_Add_Doctor_div {
     width: 100%;
   }
+  .formsubmitbutton {
+    width: 70%;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .formsubmitbutton {
-    width: 50%;
+    width: 70%;
   }
 }
