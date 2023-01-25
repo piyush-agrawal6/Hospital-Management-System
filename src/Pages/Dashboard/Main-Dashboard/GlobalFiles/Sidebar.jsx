@@ -14,9 +14,10 @@ import { NavLink } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
 import { FiLogOut } from "react-icons/fi";
 import { GrUserAdmin } from "react-icons/gr";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const AdminRoutes = [
     {
       path: "/addoctor",
@@ -96,12 +97,18 @@ const Sidebar = ({ children }) => {
   const {
     data: { user },
   } = useSelector((state) => state.auth);
-  let setUser =
-    user.userType === "nurse"
-      ? NurseRoutes
-      : user.userType === "admin"
-      ? AdminRoutes
-      : DoctorRoutes;
+
+  let setUser;
+
+  if (user?.userType === "admin") {
+    setUser = AdminRoutes;
+  }
+  if (user?.userType === "nurse") {
+    setUser = NurseRoutes;
+  }
+  if (user?.userType === "doctor") {
+    setUser = DoctorRoutes;
+  }
   const [StaffStatus, setStaffStatus] = useState(setUser);
 
   function toggle() {
@@ -124,7 +131,7 @@ const Sidebar = ({ children }) => {
             </div>
           </div>
           <div className="bottomSection">
-            {StaffStatus.map((item, index) => (
+            {StaffStatus?.map((item, index) => (
               <NavLink
                 to={item.path}
                 key={index}
@@ -140,7 +147,12 @@ const Sidebar = ({ children }) => {
                 </div>
               </NavLink>
             ))}
-            <NavLink to={"/login"} className="LogOutPath link">
+            <NavLink
+              className="LogOutPath link"
+              onClick={() => {
+                dispatch({ type: "AUTH_LOGOUT" });
+              }}
+            >
               <div className="icon">
                 <FiLogOut />
               </div>
