@@ -3,6 +3,7 @@ import { Table } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GetBeds } from "../../../../../Redux/Datas/action";
+import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Beds_Rooms = () => {
   const columns = [
@@ -88,10 +89,19 @@ const Beds_Rooms = () => {
 
   return (
     <>
-      <div className="Payment_Page">
-        <h1 style={{ marginBottom: "2rem" }}>All Beds</h1>
-        <div className="patientBox">
-          <Table columns={columns} dataSource={data} className="PaymentTable" />
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <div className="Payment_Page">
+            <h1 style={{ marginBottom: "2rem" }}>All Beds</h1>
+            <div className="patientBox">
+              <Table
+                columns={columns}
+                dataSource={data}
+                className="PaymentTable"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

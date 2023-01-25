@@ -123,6 +123,11 @@ main {
   font-size: 2rem;
 }
 
+.AfterSideBar {
+  width: 90%;
+  margin: 2rem;
+}
+
 /**************************************** FRONT PAGE STYLE  *****************************************/
 
 .maindiv {

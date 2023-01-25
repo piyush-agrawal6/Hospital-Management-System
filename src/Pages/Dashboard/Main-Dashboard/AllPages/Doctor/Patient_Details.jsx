@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import Sidebar from "../../GlobalFiles/Sidebar";
 import Topbar from "../../GlobalFiles/Topbar";
 
 const Patient_Details = () => {
@@ -32,11 +33,16 @@ const Patient_Details = () => {
 
   return (
     <>
-      <Topbar />
-      <div className="Payment_Page">
-        {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
-        <div className="patientBox">
-          <Table columns={columns} dataSource={data} />
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <Topbar />
+          <div className="Payment_Page">
+            {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
+            <div className="patientBox">
+              <Table columns={columns} dataSource={data} />
+            </div>
+          </div>
         </div>
       </div>
     </>

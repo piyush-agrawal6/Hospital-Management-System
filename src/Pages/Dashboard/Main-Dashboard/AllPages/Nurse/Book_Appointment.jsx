@@ -3,6 +3,7 @@ import { CommonProblem } from "./MixedObjectData";
 import "./CSS/Book_appointment.css";
 import { useDispatch } from "react-redux";
 import { CreateBooking } from "../../../../../Redux/Datas/action";
+import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Book_Appointment = () => {
   const [showenterProblem, setEnterProblem] = useState("none");
@@ -42,152 +43,157 @@ const Book_Appointment = () => {
 
   return (
     <>
-      <div className="Main_Add_Doctor_div">
-        <h1>Book Appointment</h1>
-        <form onSubmit={HandleOnsubmitAppointment}>
-          {/* Name PlaceHolder */}
-          <div>
-            <label>Patient Name</label>
-            <div className="inputdiv">
-              <input
-                type="text"
-                placeholder="First Name"
-                name="patientName"
-                value={BookAppoint.patientName}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* AGE PLACEHOLDER  */}
-          <div>
-            <label>Age</label>
-            <div className="inputdiv">
-              <input
-                type="number"
-                placeholder="Age"
-                name="age"
-                value={BookAppoint.age}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* GENDER PLACEHOLDER  */}
-          <div>
-            <label>Gender</label>
-            <div className="inputdiv">
-              <select
-                name="gender"
-                value={BookAppoint.gender}
-                onChange={HandleAppointment}
-              >
-                <option value="Choose Blood Group">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-          {/* MOBILE PLACEHOLDER */}
-          <div>
-            <label>Contact Number</label>
-            <div className="inputdiv">
-              <input
-                type="number"
-                placeholder="Number"
-                name="mobile"
-                value={BookAppoint.mobile}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* PROBLEM PLACEHOLDER */}
-          <div>
-            <label>Type of Disease</label>
-            <div className="inputdiv">
-              <select
-                name="problem"
-                value={BookAppoint.problem}
-                onChange={(e) => {
-                  onProblemChange();
-                  HandleAppointment(e);
-                }}
-              >
-                <option value="Choose Blood Group">Select Disease</option>
-                {CommonProblem.map((ele, i) => {
-                  return (
-                    <option key={i} value={ele.title}>
-                      {ele.title}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <div className="Main_Add_Doctor_div">
+            <h1>Book Appointment</h1>
+            <form onSubmit={HandleOnsubmitAppointment}>
+              {/* Name PlaceHolder */}
+              <div>
+                <label>Patient Name</label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    name="patientName"
+                    value={BookAppoint.patientName}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* AGE PLACEHOLDER  */}
+              <div>
+                <label>Age</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="Age"
+                    name="age"
+                    value={BookAppoint.age}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* GENDER PLACEHOLDER  */}
+              <div>
+                <label>Gender</label>
+                <div className="inputdiv">
+                  <select
+                    name="gender"
+                    value={BookAppoint.gender}
+                    onChange={HandleAppointment}
+                  >
+                    <option value="Choose Blood Group">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              {/* MOBILE PLACEHOLDER */}
+              <div>
+                <label>Contact Number</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="Number"
+                    name="mobile"
+                    value={BookAppoint.mobile}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* PROBLEM PLACEHOLDER */}
+              <div>
+                <label>Type of Disease</label>
+                <div className="inputdiv">
+                  <select
+                    name="problem"
+                    value={BookAppoint.problem}
+                    onChange={(e) => {
+                      onProblemChange();
+                      HandleAppointment(e);
+                    }}
+                  >
+                    <option value="Choose Blood Group">Select Disease</option>
+                    {CommonProblem.map((ele, i) => {
+                      return (
+                        <option key={i} value={ele.title}>
+                          {ele.title}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
 
-          {/* ENTER SAMPLE DISEASE */}
-          <div style={{ display: showenterProblem }}>
-            <label></label>
-            <div className="inputdiv">
-              <input
-                type="text"
-                placeholder="Enter Your Problem"
-                name="problem"
-                value={BookAppoint.problem}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* ADDRESS SECTION  */}
-          <div>
-            <label>Address</label>
-            <div className="inputdiv">
-              <input
-                type="text"
-                placeholder="Address line 1"
-                name="address"
-                value={BookAppoint.address}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* DEPARTMENT SECTION */}
-          <div>
-            <label>Department (Optional)</label>
-            <div className="inputdiv">
-              <input
-                type={"text"}
-                placeholder="Choose your Department"
-                name="department"
-                value={BookAppoint.department}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-          {/* APPOINTMENT DATE  */}
-          <div className="dateofAppointment">
-            <p>Date and Time </p>
-            <div className="inputdiv">
-              <input
-                type={"date"}
-                placeholder="Choose Date"
-                name="date"
-                value={BookAppoint.date}
-                onChange={HandleAppointment}
-              />
-              <input
-                type={"time"}
-                placeholder="Choose Time"
-                name="time"
-                value={BookAppoint.time}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
+              {/* ENTER SAMPLE DISEASE */}
+              <div style={{ display: showenterProblem }}>
+                <label></label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="Enter Your Problem"
+                    name="problem"
+                    value={BookAppoint.problem}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* ADDRESS SECTION  */}
+              <div>
+                <label>Address</label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="Address line 1"
+                    name="address"
+                    value={BookAppoint.address}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* DEPARTMENT SECTION */}
+              <div>
+                <label>Department (Optional)</label>
+                <div className="inputdiv">
+                  <input
+                    type={"text"}
+                    placeholder="Choose your Department"
+                    name="department"
+                    value={BookAppoint.department}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+              {/* APPOINTMENT DATE  */}
+              <div className="dateofAppointment">
+                <p>Date and Time </p>
+                <div className="inputdiv">
+                  <input
+                    type={"date"}
+                    placeholder="Choose Date"
+                    name="date"
+                    value={BookAppoint.date}
+                    onChange={HandleAppointment}
+                  />
+                  <input
+                    type={"time"}
+                    placeholder="Choose Time"
+                    name="time"
+                    value={BookAppoint.time}
+                    onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
 
-          <button type="submit" className="book_formsubmitbutton">
-            Book Appointment
-          </button>
-        </form>
+              <button type="submit" className="book_formsubmitbutton">
+                Book Appointment
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Check_Appointment = () => {
   const columns = [
@@ -23,11 +24,16 @@ const Check_Appointment = () => {
 
   return (
     <>
-      <div className="Payment_Page">
-        <h1 style={{ marginBottom: "2rem" }}>Appointment Details</h1>
-        {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
-        <div className="patientBox">
-          <Table columns={columns} dataSource={data} />
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <div className="Payment_Page">
+            <h1 style={{ marginBottom: "2rem" }}>Appointment Details</h1>
+            {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
+            <div className="patientBox">
+              <Table columns={columns} dataSource={data} />
+            </div>
+          </div>
         </div>
       </div>
     </>

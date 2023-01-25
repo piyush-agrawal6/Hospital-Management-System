@@ -1,5 +1,6 @@
 import { Table } from "antd";
 import React from "react";
+import Sidebar from "../../GlobalFiles/Sidebar";
 import "./CSS/Payment.css";
 
 const Check_Payment = () => {
@@ -80,10 +81,19 @@ const Check_Payment = () => {
 
   return (
     <>
-      <div className="Payment_Page">
-        <h1 style={{ marginBottom: "2rem" }}>All Payments</h1>
-        <div className="patientBox">
-          <Table columns={columns} dataSource={data} className="PaymentTable" />
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <div className="Payment_Page">
+            <h1 style={{ marginBottom: "2rem" }}>All Payments</h1>
+            <div className="patientBox">
+              <Table
+                columns={columns}
+                dataSource={data}
+                className="PaymentTable"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>
