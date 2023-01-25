@@ -11,6 +11,7 @@ export const CreateReport = (data) => async (dispatch) => {
       data
     );
     console.log(res);
+    return res.data;
     // dispatch({
     //   type: types.CREATE_REPORT_SUCCESS,
     //   payload: {
@@ -94,6 +95,31 @@ export const CreateBeds = (data) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: types.ADD_BED_ERROR,
+      payload: {
+        message: error,
+      },
+    });
+  }
+};
+
+//create payment
+export const CreatePayment = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.CREATE_PAYMENT_REQUEST });
+    const res = await axios.post(
+      "https://zany-gray-clam-gear.cyclic.app/payments/add",
+      data
+    );
+    console.log(res.data);
+    // dispatch({
+    //   type: types.CREATE_PAYMENT_SUCCESS,
+    //   payload: {
+    //
+    //   },
+    // });
+  } catch (error) {
+    dispatch({
+      type: types.CREATE_PAYMENT_ERROR,
       payload: {
         message: error,
       },

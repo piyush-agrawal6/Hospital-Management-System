@@ -36,8 +36,9 @@ const DLogin = () => {
           ...formvalue,
           docID: formvalue.ID,
         };
+
+        console.log(data);
         dispatch(DoctorLogin(data));
-        console.log("Doctor");
       } else if (placement === "Admin") {
         let data = {
           ...formvalue,

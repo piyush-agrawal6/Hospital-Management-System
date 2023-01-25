@@ -9,16 +9,15 @@ export const NurseLogin = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/nurses/login",
       data
     );
-    console.log(res);
-    // dispatch({
-    //   type: types.LOGIN_NURSE_SUCCESS,
-    //   payload: {
-    //     message: res.data.message,
-    //     user: res.data.user,
-    //     // token: res.data.token,
-    //     report: res.data.report,
-    //   },
-    // });
+    console.log(res.data);
+    dispatch({
+      type: types.LOGIN_NURSE_SUCCESS,
+      payload: {
+        message: res.data.message,
+        user: res.data.user,
+        token: res.data.token,
+      },
+    });
   } catch (error) {
     dispatch({
       type: types.LOGIN_NURSE_ERROR,
@@ -37,16 +36,15 @@ export const DoctorLogin = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/doctors/login",
       data
     );
-    console.log(res);
-    // dispatch({
-    //   type: types.LOGIN_DOCTOR_SUCCESS,
-    //   payload: {
-    //     message: res.data.message,
-    //     user: res.data.user,
-    //     // token: res.data.token,
-    //     report: res.data.report,
-    //   },
-    // });
+    console.log(res.data);
+    dispatch({
+      type: types.LOGIN_DOCTOR_SUCCESS,
+      payload: {
+        message: res.data.message,
+        user: res.data.user,
+        token: res.data.token,
+      },
+    });
   } catch (error) {
     dispatch({
       type: types.LOGIN_DOCTOR_ERROR,
@@ -65,16 +63,15 @@ export const AdminLogin = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/admin/login",
       data
     );
-    console.log(res);
-    // dispatch({
-    //   type: types.LOGIN_ADMIN_SUCCESS,
-    //   payload: {
-    //     message: res.data.message,
-    //     user: res.data.user,
-    //     // token: res.data.token,
-    //     report: res.data.report,
-    //   },
-    // });
+    console.log(res.data);
+    dispatch({
+      type: types.LOGIN_ADMIN_SUCCESS,
+      payload: {
+        message: res.data.message,
+        user: res.data.user,
+        token: res.data.token,
+      },
+    });
   } catch (error) {
     dispatch({
       type: types.LOGIN_ADMIN_ERROR,

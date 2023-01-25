@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
 import { FiLogOut } from "react-icons/fi";
 import { GrUserAdmin } from "react-icons/gr";
-
+import { useSelector } from "react-redux";
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const AdminRoutes = [
@@ -93,8 +93,16 @@ const Sidebar = ({ children }) => {
       icons: <BsBookmarkPlus className="mainIcon" />,
     },
   ];
-
-  const [StaffStatus, setStaffStatus] = useState(NurseRoutes);
+  const {
+    data: { user },
+  } = useSelector((state) => state.auth);
+  let setUser =
+    user.userType === "nurse"
+      ? NurseRoutes
+      : user.userType === "admin"
+      ? AdminRoutes
+      : DoctorRoutes;
+  const [StaffStatus, setStaffStatus] = useState(setUser);
 
   function toggle() {
     setIsOpen(!isOpen);

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { CreateReport } from "../../../../../Redux/Datas/action";
+import { CreatePayment, CreateReport } from "../../../../../Redux/Datas/action";
 
 const Discharge_and_Create_Slip = () => {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const initmed = {
     medName: "",
     dosage: "",
@@ -54,7 +54,16 @@ const Discharge_and_Create_Slip = () => {
       medicines,
     };
     console.log(data);
-    disptach(CreateReport(data));
+    try {
+      dispatch(CreateReport(data)).then((res) => {
+        let data = {
+          reportID: res.report._id,
+        };
+        dispatch(CreatePayment(data));
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>

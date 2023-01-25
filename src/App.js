@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       {/* <AllRoutes /> */}
-      {/* <DLogin /> */}
+      <DLogin />
       <Main />
     </>
   );
