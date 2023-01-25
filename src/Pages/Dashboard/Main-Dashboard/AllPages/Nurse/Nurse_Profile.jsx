@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Doctor/CSS/Doctor_Profile.css";
 import { AiOutlineUser } from "react-icons/ai";
 import { GiMeditation } from "react-icons/gi";
@@ -10,8 +10,14 @@ import { BsHouseFill } from "react-icons/bs";
 import { MdOutlineCastForEducation, MdFolderSpecial } from "react-icons/md";
 import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
 import Sidebar from "../../GlobalFiles/Sidebar";
-
+import { useDispatch, useSelector } from "react-redux";
+import { Button, message, Modal } from "antd";
 const Nurse_Profile = () => {
+  const {
+    data: { user },
+  } = useSelector((state) => state.auth);
+  console.log(user);
+  const dispatch = useDispatch();
   let commonStyling = {
     display: "flex",
     justifyContent: "left",
@@ -19,8 +25,68 @@ const Nurse_Profile = () => {
     alignItems: "center",
     padding: "10px",
   };
+  const [formData, setFormData] = useState({
+    nurseName: user.nurseName,
+    age: user.age,
+    gender: user.gender,
+    bloodGroup: user.bloodGroup,
+    education: user.education,
+    mobile: user.mobile,
+    department: user.department,
+    DOB: user.DOB,
+    ID: user._id,
+  });
+
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = (text) => {
+    messageApi.success(text);
+  };
+  const error = (text) => {
+    messageApi.error(text);
+  };
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleFormSubmit = () => {
+    if (
+      formData.name.trim() !== "" &&
+      formData.workAt.trim() !== "" &&
+      formData.livesin.trim() !== "" &&
+      formData.relationship.trim() !== "" &&
+      formData.username.trim() !== ""
+    ) {
+      if (formData.name.trim().length < 4) {
+        error("Name must be at least of 4 characters");
+      } else {
+        // dispatch(updateUser(formData, user._id));
+        success("user updated");
+        handleOk();
+      }
+    } else {
+      error("Please enter all required fields");
+    }
+  };
+
   return (
     <>
+      {contextHolder}
       <div className="container">
         <Sidebar />
         <div className="AfterSideBar">
@@ -42,20 +108,97 @@ const Nurse_Profile = () => {
               </div>
               <div style={commonStyling}>
                 <GiMeditation />
-                <p>Dr. SomeNurse</p>
+                <p>{user?.nurseName}</p>
               </div>
               <div style={commonStyling}>
                 <AiFillCalendar />
-                <p>29 February 2023</p>
+                <p>{user?.DOB}</p>
               </div>
               <div style={commonStyling}>
                 <MdBloodtype />
-                <p>O-</p>
+                <p>{user?.bloodGroup}</p>
               </div>
               <div style={commonStyling}>
                 <BsFillTelephoneFill />
-                <p>+91 7069173337</p>
+                <p>{user?.mobile}</p>
               </div>
+              <div onClick={showModal}>
+                <BsFillTelephoneFill />
+                Edit profile
+              </div>
+
+              <Modal
+                title="Edit details"
+                open={open}
+                onOk={handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+                footer={[
+                  <Button key="back" onClick={handleCancel}>
+                    Cancel
+                  </Button>,
+                  <Button key="submit" onClick={handleFormSubmit}>
+                    Edit
+                  </Button>,
+                ]}
+              >
+                <form className="inputForm">
+                  <input
+                    name="nurseName"
+                    value={formData.nurseName}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="Full name"
+                  />
+                  <input
+                    name="age"
+                    value={formData.age}
+                    onChange={handleFormChange}
+                    type="number"
+                    placeholder="Age"
+                  />
+                  <select name="gender" onChange={handleFormChange}>
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Others</option>
+                  </select>
+                  <select name="department" onChange={handleFormChange}>
+                    <option value="">Select department</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                  </select>
+                  <input
+                    name="bloodGroup"
+                    value={formData.bloodGroup}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="Blood Group"
+                  />
+                  <input
+                    name="education"
+                    value={formData.education}
+                    onChange={handleFormChange}
+                    type="text"
+                    placeholder="education"
+                  />
+                  <input
+                    name="mobile"
+                    value={formData.mobile}
+                    onChange={handleFormChange}
+                    type="number"
+                    placeholder="mobile"
+                  />
+                  <input
+                    name="DOB"
+                    value={formData.DOB}
+                    onChange={handleFormChange}
+                    type="date"
+                    placeholder="Date of birth"
+                  />
+                </form>
+              </Modal>
             </div>
             {/* ***********  Second Div ******************** */}
             <div className="SecondBox">
@@ -65,14 +208,19 @@ const Nurse_Profile = () => {
                 </h2>
                 <div style={commonStyling}>
                   <BsHouseFill />
-                  <p>
-                    {" "}
-                    Antilia, Ambani Tower, Altamount Road, Cumballa Hill, Mumbai{" "}
-                  </p>
+                  <p>{user?.gender}</p>
+                </div>
+                <div style={commonStyling}>
+                  <BsHouseFill />
+                  <p>{user?.age}</p>
+                </div>
+                <div style={commonStyling}>
+                  <BsHouseFill />
+                  <p>{user?.department}</p>
                 </div>
                 <div style={commonStyling}>
                   <MdOutlineCastForEducation />
-                  <p>MBBS, Oxford University</p>
+                  <p>{user?.education}</p>
                 </div>
               </div>
               {/* ***********  Third Div ******************** */}
