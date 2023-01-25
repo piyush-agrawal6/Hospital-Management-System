@@ -224,7 +224,7 @@ const Discharge_and_Create_Slip = () => {
             </div>
           </div>
 
-          <button type="submit" className="formsubmitbutton">
+          <button type="submit" className="formsubmitbutton bookingbutton">
             Generate Report
           </button>
         </form>

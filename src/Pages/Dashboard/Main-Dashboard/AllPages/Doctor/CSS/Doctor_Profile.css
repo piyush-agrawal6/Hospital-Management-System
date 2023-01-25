@@ -39,6 +39,10 @@
   flex-direction: column;
 }
 
+.bookingbutton {
+  width: 30%;
+}
+
 @media only screen and (max-width: 1024px) {
   .maindoctorProfile {
     display: block;
