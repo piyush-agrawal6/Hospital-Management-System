@@ -8,6 +8,7 @@ import { MdOutlineBedroomParent } from "react-icons/md";
 import { FaAmbulance } from "react-icons/fa";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 import { MdPayment } from "react-icons/md";
+import Sidebar from "./Sidebar";
 
 const FrontPage = () => {
   const columns = [
@@ -54,7 +55,8 @@ const FrontPage = () => {
   ];
 
   return (
-    <>
+    <div>
+      <Sidebar />
       <h1 style={{ color: "rgb(184 191 234)" }}>Overview</h1>
       <div className="maindiv">
         <div className="one commondiv">
@@ -127,7 +129,7 @@ const FrontPage = () => {
           <Table columns={columns} dataSource={data} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

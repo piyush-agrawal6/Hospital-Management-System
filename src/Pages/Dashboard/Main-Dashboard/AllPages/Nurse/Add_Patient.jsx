@@ -4,6 +4,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import doctor from "../../../../../img/doctoravatar.png";
 import { useDispatch } from "react-redux";
 import { AddPatients, CreateBeds } from "../../../../../Redux/Datas/action";
+import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Add_Patient = () => {
   const getBase64 = (img, callback) => {
@@ -94,6 +95,7 @@ const Add_Patient = () => {
 
   return (
     <>
+      <Sidebar />
       <div className="Main_Add_Doctor_div">
         <h1>Add Patient</h1>
         <img src={doctor} alt="doctor" className="avatarimg" />
