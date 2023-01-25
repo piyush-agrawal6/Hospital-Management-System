@@ -3,29 +3,37 @@ import one from "../../../../../img/ambuone.png";
 import two from "../../../../../img/ambutwo.png";
 import three from "../../../../../img/ambuthree.png";
 import "./CSS/Add_Ambu.css";
+import { useDispatch } from "react-redux";
+import { AmbulanceRegister } from "../../../../../Redux/auth/action";
 
 const Add_Ambulance = () => {
-  let [ambuType, setambuType] = useState("");
+  let [ambuType, setambuType] = useState("none");
 
   const [AmbuData, setAmbuDate] = useState({
-    AmbulanceType: ambuType,
+    type: "none",
     charges: "",
-    code: "",
-    driver: "",
-    driverNumber: "",
+    ambulanceID: "",
+    ambulanceDriver: "",
+    number: "",
   });
+
+  const dispatch = useDispatch();
 
   const HandleAmbuChange = (e) => {
     setAmbuDate({
       ...AmbuData,
       [e.target.name]: e.target.value,
-      AmbulanceType: ambuType,
     });
   };
 
   const HandleAmbuSubmit = (e) => {
     e.preventDefault();
-    console.log(AmbuData);
+    let data = {
+      ...AmbuData,
+      type: ambuType,
+    };
+    console.log(data);
+    dispatch(AmbulanceRegister(data));
   };
 
   return (
@@ -54,14 +62,20 @@ const Add_Ambulance = () => {
           <div>
             <label>Ambulance Type</label>
             <div className="inputdiv">
-              <input type="text" placeholder="Select img" value={ambuType} />
+              <input
+                type="text"
+                placeholder="Select img"
+                name="type"
+                value={ambuType}
+                onChange={HandleAmbuChange}
+              />
             </div>
           </div>
           <div>
             <label>Price per Hours</label>
             <div className="inputdiv">
               <input
-                type="text"
+                type="number"
                 placeholder="eg.200/-"
                 name="charges"
                 value={AmbuData.charges}
@@ -73,10 +87,10 @@ const Add_Ambulance = () => {
             <label>Ambulance Code</label>
             <div className="inputdiv">
               <input
-                type="text"
-                placeholder="eg.EVB36A"
-                name="code"
-                value={AmbuData.code}
+                type="number"
+                placeholder="eg.1223"
+                name="ambulanceID"
+                value={AmbuData.ambulanceID}
                 onChange={HandleAmbuChange}
               />
             </div>
@@ -87,8 +101,8 @@ const Add_Ambulance = () => {
               <input
                 type="text"
                 placeholder="Name"
-                name="driver"
-                value={AmbuData.driver}
+                name="ambulanceDriver"
+                value={AmbuData.ambulanceDriver}
                 onChange={HandleAmbuChange}
               />
             </div>
@@ -99,8 +113,8 @@ const Add_Ambulance = () => {
               <input
                 type="number"
                 placeholder="Contact No"
-                name="driverNumber"
-                value={AmbuData.driverNumber}
+                name="number"
+                value={AmbuData.number}
                 onChange={HandleAmbuChange}
               />
             </div>

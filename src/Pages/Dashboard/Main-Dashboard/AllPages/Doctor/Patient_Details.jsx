@@ -28,46 +28,6 @@ const Patient_Details = () => {
       Checked_By: "Dr.Rajendra Patel",
       Report_Ref: "ERODEII334l",
     },
-    {
-      key: 3,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-    },
-    {
-      key: 4,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-    },
-    {
-      key: 5,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-    },
-    {
-      key: 6,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-    },
-    {
-      key: 7,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-    },
   ];
 
   return (

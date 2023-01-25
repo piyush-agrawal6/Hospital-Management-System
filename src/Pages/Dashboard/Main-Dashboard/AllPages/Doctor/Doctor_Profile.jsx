@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CSS/Doctor_Profile.css";
 import { AiOutlineUser } from "react-icons/ai";
 import { GiMeditation } from "react-icons/gi";
@@ -9,9 +9,12 @@ import { MdMail } from "react-icons/md";
 import { BsHouseFill } from "react-icons/bs";
 import { MdOutlineCastForEducation, MdFolderSpecial } from "react-icons/md";
 import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { GetDoctorDetails } from "../../../../../Redux/Datas/action";
 
 // *********************************************************
 const Doctor_Profile = () => {
+  const disptach = useDispatch();
   let commonStyling = {
     display: "flex",
     justifyContent: "left",
@@ -19,6 +22,10 @@ const Doctor_Profile = () => {
     alignItems: "center",
     padding: "10px",
   };
+
+  useEffect(() => {
+    disptach(GetDoctorDetails());
+  }, []);
   return (
     <>
       <div className="maindoctorProfile">

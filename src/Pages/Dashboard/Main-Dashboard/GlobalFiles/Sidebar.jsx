@@ -13,6 +13,7 @@ import { MdBedroomChild } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
 import { FiLogOut } from "react-icons/fi";
+import { GrUserAdmin } from "react-icons/gr";
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,6 +42,11 @@ const Sidebar = ({ children }) => {
       path: "/rooms",
       name: "Beds and Rooms",
       icons: <MdBedroomChild className="mainIcon" />,
+    },
+    {
+      path: "/admin",
+      name: "Add Admin",
+      icons: <GrUserAdmin className="mainIcon" />,
     },
   ];
   const DoctorRoutes = [
@@ -88,7 +94,7 @@ const Sidebar = ({ children }) => {
     },
   ];
 
-  const [StaffStatus, setStaffStatus] = useState(DoctorRoutes);
+  const [StaffStatus, setStaffStatus] = useState(NurseRoutes);
 
   function toggle() {
     setIsOpen(!isOpen);

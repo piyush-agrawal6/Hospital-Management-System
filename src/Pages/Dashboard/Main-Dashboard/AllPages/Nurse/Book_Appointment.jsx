@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CommonProblem } from "./MixedObjectData";
 import "./CSS/Book_appointment.css";
+import { useDispatch } from "react-redux";
+import { CreateBooking } from "../../../../../Redux/Datas/action";
 
 const Book_Appointment = () => {
   const [showenterProblem, setEnterProblem] = useState("none");
@@ -14,13 +16,15 @@ const Book_Appointment = () => {
     console.log(BookAppoint.disease);
   };
 
+  const dispatch = useDispatch();
+
   const [BookAppoint, setBookAppoint] = useState({
-    name: "",
-    id: "",
+    patientName: "",
+    patientID: Date.now(),
     age: "",
     gender: "",
-    number: "",
-    disease: "",
+    mobile: "",
+    problem: "",
     address: "",
     department: "",
     date: "",
@@ -33,7 +37,7 @@ const Book_Appointment = () => {
 
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
-    console.log(BookAppoint);
+    dispatch(CreateBooking(BookAppoint));
   };
 
   return (
@@ -48,26 +52,12 @@ const Book_Appointment = () => {
               <input
                 type="text"
                 placeholder="First Name"
-                name="name"
-                value={BookAppoint.name}
+                name="patientName"
+                value={BookAppoint.patientName}
                 onChange={HandleAppointment}
               />
             </div>
           </div>
-          {/* Name PlaceHolder */}
-          <div>
-            <label>Patient Id</label>
-            <div className="inputdiv">
-              <input
-                type="text"
-                placeholder="Id"
-                name="id"
-                value={BookAppoint.id}
-                onChange={HandleAppointment}
-              />
-            </div>
-          </div>
-
           {/* AGE PLACEHOLDER  */}
           <div>
             <label>Age</label>
@@ -104,8 +94,8 @@ const Book_Appointment = () => {
               <input
                 type="number"
                 placeholder="Number"
-                name="number"
-                value={BookAppoint.number}
+                name="mobile"
+                value={BookAppoint.mobile}
                 onChange={HandleAppointment}
               />
             </div>
@@ -115,8 +105,8 @@ const Book_Appointment = () => {
             <label>Type of Disease</label>
             <div className="inputdiv">
               <select
-                name="disease"
-                value={BookAppoint.disease}
+                name="problem"
+                value={BookAppoint.problem}
                 onChange={(e) => {
                   onProblemChange();
                   HandleAppointment(e);
@@ -138,7 +128,13 @@ const Book_Appointment = () => {
           <div style={{ display: showenterProblem }}>
             <label></label>
             <div className="inputdiv">
-              <input type="text" placeholder="Enter Your Problem" />
+              <input
+                type="text"
+                placeholder="Enter Your Problem"
+                name="problem"
+                value={BookAppoint.problem}
+                onChange={HandleAppointment}
+              />
             </div>
           </div>
           {/* ADDRESS SECTION  */}

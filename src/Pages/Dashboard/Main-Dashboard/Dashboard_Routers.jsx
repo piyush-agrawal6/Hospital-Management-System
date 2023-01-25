@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Add_Admin from "./AllPages/Admin/Add_Admin";
 import Add_Ambulance from "./AllPages/Admin/Add_Ambulance";
 import AddDoctor from "./AllPages/Admin/Add_Doctor";
 import Add_Nurse from "./AllPages/Admin/Add_Nurse";
@@ -27,6 +28,7 @@ const Dashboard_Routers = () => {
           <Route path="/addnurse" element={<Add_Nurse />} />
           <Route path="/checkpayment" element={<Check_Payment />} />
           <Route path="/rooms" element={<Beds_Rooms />} />
+          <Route path="/admin" element={<Add_Admin />} />
           ******************** Doctor Part *************************
           <Route path="/checkappointment" element={<Check_Appointment />} />
           <Route path="/createslip" element={<Discharge_and_Create_Slip />} />

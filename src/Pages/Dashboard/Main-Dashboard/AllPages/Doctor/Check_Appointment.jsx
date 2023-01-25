@@ -3,53 +3,21 @@ import React from "react";
 
 const Check_Appointment = () => {
   const columns = [
-    { title: "Id", dataIndex: "Id", key: "Id" },
-    { title: "Patient Name", dataIndex: "Patient_Name", key: "Patient Name" },
-    { title: "Age", dataIndex: "Age", key: "Age" },
-    { title: "Disease", dataIndex: "Disease", key: "Disease" },
-    { title: "Date", dataIndex: "Date", key: "Date" },
+    { title: "Patient Name", dataIndex: "patientName", key: "patientName" },
+    { title: "Mobile", dataIndex: "mobile", key: "mobile" },
+    { title: "Disease", dataIndex: "problem", key: "problem" },
+    { title: "Department", dataIndex: "department", key: "department" },
+    { title: "Date", dataIndex: "date", key: "date" },
   ];
 
   const data = [
     {
       key: 1,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Age: 30,
-      Disease: "Cobra Bite",
-      Date: "12-09-2022",
-    },
-    {
-      key: 2,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Age: 30,
-      Disease: "Cobra Bite",
-      Date: "12-09-2022",
-    },
-    {
-      key: 3,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Age: 30,
-      Disease: "Cobra Bite",
-      Date: "12-09-2022",
-    },
-    {
-      key: 4,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Age: 30,
-      Disease: "Cobra Bite",
-      Date: "12-09-2022",
-    },
-    {
-      key: 5,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Age: 30,
-      Disease: "Cobra Bite",
-      Date: "12-09-2022",
+      patientName: "ERFCE34",
+      mobile: "The Rock",
+      problem: 30,
+      department: "Cobra Bite",
+      date: "12-09-2022",
     },
   ];
 

@@ -1,73 +1,98 @@
 import React from "react";
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Dropdown, Space, Table } from "antd";
-
-const items = [
-  { key: "1", label: "Action 1" },
-  { key: "2", label: "Action 2" },
-];
+import { Table } from "antd";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { GetBeds } from "../../../../../Redux/Datas/action";
 
 const Beds_Rooms = () => {
-  const expandedRowRender = () => {
-    const columns = [
-      { title: "", dataIndex: "bed_number", key: "bed_number" },
-      { title: "", dataIndex: "status", key: "status" },
-
-      { title: "", dataIndex: "patient_name", key: "patient_name" },
-      { title: "", dataIndex: "diagnosis", key: "diagnosis" },
-      {
-        title: "",
-        dataIndex: "doctor_Assigned",
-        key: "doctor_Assigned",
-      },
-      { title: "", dataIndex: "Addmission", key: "Addmission" },
-    ];
-
-    const data = [];
-    for (let i = 0; i < 4; ++i) {
-      data.push({
-        key: i.toString(),
-        bed_number: "Bed" + " " + (i + 1).toString(),
-        status: "finished",
-        patient_name: "Rajendra Patel",
-        diagnosis: "Unknown Disease",
-        doctor_Assigned: "No Doctor",
-        Addmission: "12-02-2024",
-      });
-    }
-    return <Table columns={columns} dataSource={data} pagination={false} />;
-  };
-
-  const data = [];
-  for (let i = 0; i < 3; ++i) {
-    data.push({
-      key: i.toString(),
-      bed_number: "Room" + " " + (i + 1).toString(),
-    });
-  }
-
   const columns = [
-    { title: "Bed Number", dataIndex: "bed_number", key: "bed_number" },
-    { title: "Status", dataIndex: "Status", key: "Status" },
-    { title: "Patient Name", dataIndex: "patient_name", key: "patient_name" },
-    { title: "Diagnosis", dataIndex: "diagnosis", key: "diagnosis" },
-    {
-      title: "Doctor Assigned",
-      dataIndex: "doctor_Assigned",
-      key: "doctor_Assigned",
-    },
-    { title: "Addmission", dataIndex: "Addmission", key: "Addmission" },
+    { title: "Id", dataIndex: "Id", key: "Id" },
+    { title: "Patient Name", dataIndex: "Patient_Name", key: "Patient Name" },
+    { title: "Date", dataIndex: "Date", key: "Date" },
+    { title: "Checked By", dataIndex: "Checked_By", key: "Checked By" },
+    { title: "Report Ref", dataIndex: "Report_Ref", key: "Report Ref" },
+    { title: "Total Cost", dataIndex: "Total_Cost", key: "Total Cost" },
   ];
+
+  const dispatch = useDispatch();
+
+  const data = [
+    {
+      key: 1,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 2,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 3,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 4,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 5,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 6,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+    {
+      key: 7,
+      Id: "ERFCE34",
+      Patient_Name: "The Rock",
+      Date: "12-09-2022",
+      Checked_By: "Dr.Rajendra Patel",
+      Report_Ref: "ERODEII334l",
+      Total_Cost: "₹ 3000",
+    },
+  ];
+
+  useEffect(() => {
+    dispatch(GetBeds());
+  });
 
   return (
     <>
-      <h1 style={{ marginBottom: "2rem" }}>Total Rooms </h1>
-      <div className="patientBox">
-        <Table
-          columns={columns}
-          expandable={{ expandedRowRender, defaultExpandedRowKeys: ["0"] }}
-          dataSource={data}
-        />
+      <div className="Payment_Page">
+        <h1 style={{ marginBottom: "2rem" }}>All Beds</h1>
+        <div className="patientBox">
+          <Table columns={columns} dataSource={data} className="PaymentTable" />
+        </div>
       </div>
     </>
   );

@@ -3,13 +3,20 @@ import { Radio } from "antd";
 import banner from "../../../img/banner.png";
 import profile from "../../../img/profile.png";
 import "./DLogin.css";
+import { useDispatch } from "react-redux";
+import {
+  AdminLogin,
+  DoctorLogin,
+  NurseLogin,
+} from "../../../Redux/auth/action";
 
 const DLogin = () => {
   const [placement, SetPlacement] = useState("Nurse");
   const [formvalue, setFormvalue] = useState({
-    id: "",
+    ID: "",
     password: "",
   });
+  const dispatch = useDispatch();
 
   const Handlechange = (e) => {
     setFormvalue({ ...formvalue, [e.target.name]: e.target.value });
@@ -17,9 +24,28 @@ const DLogin = () => {
 
   const HandleSubmit = (e) => {
     e.preventDefault();
-    if (formvalue) {
-      // NAVIGATE TO DASHBOARD PAGE
-      console.log("Navigate to Dashboard page");
+    if (formvalue.ID !== "" && formvalue.password !== "") {
+      if (placement === "Nurse") {
+        let data = {
+          ...formvalue,
+          nurseID: formvalue.ID,
+        };
+        dispatch(NurseLogin(data));
+      } else if (placement === "Doctor") {
+        let data = {
+          ...formvalue,
+          docID: formvalue.ID,
+        };
+        dispatch(DoctorLogin(data));
+        console.log("Doctor");
+      } else if (placement === "Admin") {
+        let data = {
+          ...formvalue,
+          adminID: formvalue.ID,
+        };
+        console.log(data);
+        dispatch(AdminLogin(data));
+      }
     }
   };
 
@@ -59,9 +85,9 @@ const DLogin = () => {
             <form onSubmit={HandleSubmit}>
               <h3>{placement} ID</h3>
               <input
-                type="text"
-                name="id"
-                value={formvalue.id}
+                type="number"
+                name="ID"
+                value={formvalue.ID}
                 onChange={Handlechange}
                 required
               />

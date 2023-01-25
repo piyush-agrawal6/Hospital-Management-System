@@ -3,6 +3,8 @@ import "./CSS/Add_Doctor.css";
 import nurse from "../../../../../img/nurseavatar.png";
 import { message, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { NurseRegister } from "../../../../../Redux/auth/action";
 
 const Add_Nurse = () => {
   const getBase64 = (img, callback) => {
@@ -10,6 +12,8 @@ const Add_Nurse = () => {
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
+
+  const dispatch = useDispatch();
 
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -25,30 +29,31 @@ const Add_Nurse = () => {
 
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
-  const [DoctorValue, setDoctorValue] = useState({
-    name: "",
+  const [NurseValue, setNurseValue] = useState({
+    nurseName: "",
     age: "",
-    number: "",
+    mobile: "",
     email: "",
     gender: "",
-    dob: "",
-    addressone: "",
-    addresstwo: "",
+    DOB: "",
+    address: "",
     education: "",
-    speciality: "",
-    Id: "",
+    department: "",
+    nurseID: Date.now(),
     password: "",
-    image: imageUrl,
-    otherDetails: "",
+    image: "imageUrl",
+    details: "",
+    bloodGroup: "",
   });
 
   const HandleDoctorChange = (e) => {
-    setDoctorValue({ ...DoctorValue, [e.target.name]: e.target.value });
+    setNurseValue({ ...NurseValue, [e.target.name]: e.target.value });
   };
 
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
-    console.log(DoctorValue);
+    console.log(NurseValue);
+    dispatch(NurseRegister(NurseValue));
   };
 
   const handleChange = (info) => {
@@ -83,8 +88,8 @@ const Add_Nurse = () => {
             <input
               type="text"
               placeholder="Full Name"
-              name="name"
-              value={DoctorValue.name}
+              name="nurseName"
+              value={NurseValue.nurseName}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -96,7 +101,7 @@ const Add_Nurse = () => {
               type="number"
               placeholder="Age"
               name="age"
-              value={DoctorValue.age}
+              value={NurseValue.age}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -107,8 +112,8 @@ const Add_Nurse = () => {
             <input
               type="number"
               placeholder="Emergency Number"
-              name="number"
-              value={DoctorValue.number}
+              name="mobile"
+              value={NurseValue.mobile}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -120,7 +125,7 @@ const Add_Nurse = () => {
               type="email"
               placeholder="abc@abc.com"
               name="email"
-              value={DoctorValue.email}
+              value={NurseValue.email}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -130,7 +135,7 @@ const Add_Nurse = () => {
           <div className="inputdiv">
             <select
               name="gender"
-              value={DoctorValue.gender}
+              value={NurseValue.gender}
               onChange={HandleDoctorChange}
             >
               <option value="Choose Gender">Choose Gender</option>
@@ -146,8 +151,8 @@ const Add_Nurse = () => {
             <input
               type="date"
               placeholder="dd-mm-yy"
-              name="dob"
-              value={DoctorValue.dob}
+              name="DOB"
+              value={NurseValue.DOB}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -158,15 +163,8 @@ const Add_Nurse = () => {
             <input
               type="text"
               placeholder="Address line 1"
-              name="addressone"
-              value={DoctorValue.addressone}
-              onChange={HandleDoctorChange}
-            />
-            <input
-              type="text"
-              placeholder="Address line 2"
-              name="addresstwo"
-              value={DoctorValue.addresstwo}
+              name="address"
+              value={NurseValue.address}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -178,7 +176,7 @@ const Add_Nurse = () => {
               type="text"
               placeholder="eg.MBBS"
               name="education"
-              value={DoctorValue.education}
+              value={NurseValue.education}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -189,24 +187,34 @@ const Add_Nurse = () => {
             <input
               type="text"
               placeholder="Specility"
-              name="speciality"
-              value={DoctorValue.speciality}
+              name="department"
+              value={NurseValue.department}
               onChange={HandleDoctorChange}
             />
           </div>
         </div>
         <div>
-          <label>Nurse ID</label>
+          <label>Blood Group</label>
           <div className="inputdiv">
-            <input
-              type="text"
-              placeholder="ID"
-              name="Id"
-              value={DoctorValue.Id}
+            <select
+              name="bloodGroup"
+              value={NurseValue.bloodGroup}
               onChange={HandleDoctorChange}
-            />
+              required
+            >
+              <option value="Choose Blood Group">Select</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
           </div>
         </div>
+
         <div>
           <label>Password</label>
           <div className="inputdiv">
@@ -214,7 +222,7 @@ const Add_Nurse = () => {
               type="text"
               placeholder="Password"
               name="password"
-              value={DoctorValue.password}
+              value={NurseValue.password}
               onChange={HandleDoctorChange}
             />
           </div>
@@ -227,13 +235,13 @@ const Add_Nurse = () => {
               placeholder="Extra Info"
               rows="4"
               cols="50"
-              name="otherDetails"
-              value={DoctorValue.otherDetails}
+              name="details"
+              value={NurseValue.details}
               onChange={HandleDoctorChange}
             />
           </div>
         </div>
-        <div>
+        {/* <div>
           <label>Image</label>
           <div className="inputdiv">
             <Upload
@@ -253,7 +261,7 @@ const Add_Nurse = () => {
               )}
             </Upload>
           </div>
-        </div>
+        </div> */}
 
         <button type="submit" className="formsubmitbutton">
           Submit
