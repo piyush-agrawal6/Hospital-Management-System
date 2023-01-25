@@ -4,6 +4,7 @@ import banner from "../../../img/banner.png";
 import profile from "../../../img/profile.png";
 import "./DLogin.css";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   AdminLogin,
   DoctorLogin,
@@ -21,7 +22,7 @@ const DLogin = () => {
   const Handlechange = (e) => {
     setFormvalue({ ...formvalue, [e.target.name]: e.target.value });
   };
-
+  const navigate = useNavigate();
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (formvalue.ID !== "" && formvalue.password !== "") {
@@ -31,21 +32,22 @@ const DLogin = () => {
           nurseID: formvalue.ID,
         };
         dispatch(NurseLogin(data));
+        return navigate("/dashboard");
       } else if (placement === "Doctor") {
         let data = {
           ...formvalue,
           docID: formvalue.ID,
         };
-
         console.log(data);
         dispatch(DoctorLogin(data));
+        return navigate("/dashboard");
       } else if (placement === "Admin") {
         let data = {
           ...formvalue,
           adminID: formvalue.ID,
         };
-        console.log(data);
         dispatch(AdminLogin(data));
+        return navigate("/dashboard");
       }
     }
   };

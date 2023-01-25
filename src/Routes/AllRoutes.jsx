@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Footer from "../Components/Footer/Footer";
-import Navbar from "../Components/Navbar/Navbar";
-import Home from "../Pages/Home/Home";
+import DLogin from "../Pages/Dashboard/Dashboard-Login/DLogin";
+import Dashboard_Routers from "../Pages/Dashboard/Main-Dashboard/Dashboard_Routers";
 const AllRoutes = () => {
   return (
-    <>
-      {/* <Navbar /> */}
-      <Routes></Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<DLogin />} />
+      <Route path="/dashboard" element={<Dashboard_Routers />} />
+      {/* <Route path="" element={} /> */}
+    </Routes>
   );
 };
 
