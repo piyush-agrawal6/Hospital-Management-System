@@ -127,7 +127,7 @@ export const CreatePayment = (data) => async (dispatch) => {
   }
 };
 
-//ADD BEDS
+//GET BEDS
 
 export const GetBeds = () => async (dispatch) => {
   try {
@@ -137,9 +137,10 @@ export const GetBeds = () => async (dispatch) => {
     // dispatch({
     //   type: types.GET_BED_SUCCESS,
     //   payload: {
-    //
+
     //   },
     // });
+    return res.data;
   } catch (error) {
     dispatch({
       type: types.GET_BED_ERROR,
@@ -161,6 +162,22 @@ export const CreateBooking = (data) => async (dispatch) => {
     );
     console.log(res);
     // dispatch({ type: types.CREATE_BOOKING_SUCCESS, payload: res.data.postData });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//CREATE BOOKING
+
+export const UpdateNurse = (data, id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.EDIT_NURSE_REQUEST });
+    const res = await axios.patch(
+      `https://zany-gray-clam-gear.cyclic.app/nurses/${id}`,
+      data
+    );
+    console.log(res);
+    // dispatch({ type: types.EDIT_NURSE_SUCCESS, payload: res.data.postData });
   } catch (error) {
     console.log(error);
   }

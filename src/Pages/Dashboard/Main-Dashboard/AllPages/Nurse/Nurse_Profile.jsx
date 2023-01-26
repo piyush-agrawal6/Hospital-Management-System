@@ -12,6 +12,7 @@ import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, message, Modal } from "antd";
+import { UpdateNurse } from "../../../../../Redux/Datas/action";
 const Nurse_Profile = () => {
   const {
     data: { user },
@@ -65,23 +66,10 @@ const Nurse_Profile = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleFormSubmit = () => {
-    if (
-      formData.name.trim() !== "" &&
-      formData.workAt.trim() !== "" &&
-      formData.livesin.trim() !== "" &&
-      formData.relationship.trim() !== "" &&
-      formData.username.trim() !== ""
-    ) {
-      if (formData.name.trim().length < 4) {
-        error("Name must be at least of 4 characters");
-      } else {
-        // dispatch(updateUser(formData, user._id));
-        success("user updated");
-        handleOk();
-      }
-    } else {
-      error("Please enter all required fields");
-    }
+    console.log(formData);
+    // dispatch(UpdateNurse(formData, user._id));
+    // success("user updated");
+    handleOk();
   };
 
   return (
