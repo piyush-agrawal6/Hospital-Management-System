@@ -3,14 +3,17 @@ import one from "../../../../../img/ambuone.png";
 import two from "../../../../../img/ambutwo.png";
 import three from "../../../../../img/ambuthree.png";
 import "./CSS/Add_Ambu.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AmbulanceRegister } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 const notify = (text) => toast(text);
 
 const Add_Ambulance = () => {
+  const { data } = useSelector((store) => store.auth);
+
   let [ambuType, setambuType] = useState("none");
 
   const [AmbuData, setAmbuDate] = useState({
@@ -40,6 +43,14 @@ const Add_Ambulance = () => {
     dispatch(AmbulanceRegister(data));
     notify("Ambulance Added");
   };
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   return (
     <>

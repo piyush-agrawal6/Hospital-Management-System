@@ -25,7 +25,6 @@ const AllRoutes = () => {
         <Route path="/addoctor" element={<AddDoctor />} />
         <Route path="/addambulance" element={<Add_Ambulance />} />
         <Route path="/addnurse" element={<Add_Nurse />} />
-        <Route path="/checkpayment" element={<Check_Payment />} />
         <Route path="/rooms" element={<Beds_Rooms />} />
         <Route path="/admin" element={<Add_Admin />} />
         <Route path="/addbeds" element={<AddBeds />} />

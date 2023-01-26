@@ -267,3 +267,37 @@ export const dischargePatient = (data) => async (dispatch) => {
     console.log(error);
   }
 };
+
+// GET ALL PATIENT
+export const GetPatients = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_PATIENT_REQUEST });
+    const res = await axios.get(
+      `https://zany-gray-clam-gear.cyclic.app/patients`
+    );
+    console.log(res.data);
+    dispatch({
+      type: types.GET_PATIENT_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// GET ALL DATA
+export const GetAllData = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_ALLDATA_REQUEST });
+    const res = await axios.get(
+      `https://zany-gray-clam-gear.cyclic.app/hospitals`
+    );
+    console.log(res.data);
+    dispatch({
+      type: types.GET_ALLDATA_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

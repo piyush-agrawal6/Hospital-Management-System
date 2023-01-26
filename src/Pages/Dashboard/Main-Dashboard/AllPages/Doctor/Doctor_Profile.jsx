@@ -9,12 +9,15 @@ import { MdMail } from "react-icons/md";
 import { BsHouseFill } from "react-icons/bs";
 import { MdOutlineCastForEducation, MdFolderSpecial } from "react-icons/md";
 import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GetDoctorDetails } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import { Navigate } from "react-router-dom";
 
 // *********************************************************
 const Doctor_Profile = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const disptach = useDispatch();
   let commonStyling = {
     display: "flex",
@@ -27,6 +30,13 @@ const Doctor_Profile = () => {
   useEffect(() => {
     disptach(GetDoctorDetails());
   }, []);
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "doctor") {
+    return <Navigate to={"/dashboard"} />;
+  }
   return (
     <>
       <div className="container">

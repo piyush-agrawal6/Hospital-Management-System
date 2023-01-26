@@ -10,6 +10,9 @@ import {
   DoctorLogin,
   NurseLogin,
 } from "../../../Redux/auth/action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const notify = (text) => toast(text);
 
 const DLogin = () => {
   const [placement, SetPlacement] = useState("Nurse");
@@ -31,23 +34,53 @@ const DLogin = () => {
           ...formvalue,
           nurseID: formvalue.ID,
         };
-        dispatch(NurseLogin(data));
-        return navigate("/dashboard");
+        dispatch(NurseLogin(data)).then((res) => {
+          if (res.message === "Successful") {
+            notify("Login Successful");
+            return navigate("/dashboard");
+          }
+          if (res.message === "Wrong credentials") {
+            notify("Wrong credentials");
+          }
+          if (res.message === "Error") {
+            notify("Something went Wrong, Please Try Again");
+          }
+        });
       } else if (placement === "Doctor") {
         let data = {
           ...formvalue,
           docID: formvalue.ID,
         };
         console.log(data);
-        dispatch(DoctorLogin(data));
-        return navigate("/dashboard");
+        dispatch(DoctorLogin(data)).then((res) => {
+          if (res.message === "Successful") {
+            notify("Login Successful");
+            return navigate("/dashboard");
+          }
+          if (res.message === "Wrong credentials") {
+            notify("Wrong credentials");
+          }
+          if (res.message === "Error") {
+            notify("Something went Wrong, Please Try Again");
+          }
+        });
       } else if (placement === "Admin") {
         let data = {
           ...formvalue,
           adminID: formvalue.ID,
         };
-        dispatch(AdminLogin(data));
-        return navigate("/dashboard");
+        dispatch(AdminLogin(data)).then((res) => {
+          if (res.message === "Successful") {
+            notify("Login Successful");
+            return navigate("/dashboard");
+          }
+          if (res.message === "Wrong credentials") {
+            notify("Wrong credentials");
+          }
+          if (res.message === "Error") {
+            notify("Something went Wrong, Please Try Again");
+          }
+        });
       }
     }
   };
@@ -58,6 +91,8 @@ const DLogin = () => {
 
   return (
     <>
+      <ToastContainer />
+
       <div className="mainLoginPage">
         <div className="leftside">
           <img src={banner} alt="banner" />

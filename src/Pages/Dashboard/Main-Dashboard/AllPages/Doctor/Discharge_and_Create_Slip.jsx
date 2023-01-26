@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { CreatePayment, CreateReport } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Discharge_and_Create_Slip = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const dispatch = useDispatch();
   const initmed = {
     medName: "",
@@ -66,6 +69,14 @@ const Discharge_and_Create_Slip = () => {
       console.log(error);
     }
   };
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "doctor") {
+    return <Navigate to={"/dashboard"} />;
+  }
   return (
     <>
       <div className="container">

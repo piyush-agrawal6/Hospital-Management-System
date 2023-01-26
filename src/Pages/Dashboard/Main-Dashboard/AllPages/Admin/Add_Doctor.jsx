@@ -4,15 +4,18 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 import doctor from "../../../../../img/doctoravatar.png";
 import { message, Upload } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DoctorRegister } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 const notify = (text) => toast(text);
 
 const AddDoctor = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
@@ -85,6 +88,14 @@ const AddDoctor = () => {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   return (
     <>

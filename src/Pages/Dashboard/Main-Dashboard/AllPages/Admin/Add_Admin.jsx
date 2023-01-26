@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AdminRegister } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import admin from "../../../../../img/admin.jpg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 const notify = (text) => toast(text);
 
 const Add_Admin = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const [AdminValue, setAdminValue] = useState({
     adminName: "",
     age: "",
@@ -33,6 +36,14 @@ const Add_Admin = () => {
     dispatch(AdminRegister(AdminValue));
     notify("Admin Added");
   };
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   return (
     <>

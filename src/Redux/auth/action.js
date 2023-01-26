@@ -9,7 +9,6 @@ export const NurseLogin = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/nurses/login",
       data
     );
-    console.log(res.data);
     dispatch({
       type: types.LOGIN_NURSE_SUCCESS,
       payload: {
@@ -18,6 +17,7 @@ export const NurseLogin = (data) => async (dispatch) => {
         token: res.data.token,
       },
     });
+    return res.data;
   } catch (error) {
     dispatch({
       type: types.LOGIN_NURSE_ERROR,
@@ -45,6 +45,7 @@ export const DoctorLogin = (data) => async (dispatch) => {
         token: res.data.token,
       },
     });
+    return res.data;
   } catch (error) {
     dispatch({
       type: types.LOGIN_DOCTOR_ERROR,
@@ -72,6 +73,7 @@ export const AdminLogin = (data) => async (dispatch) => {
         token: res.data.token,
       },
     });
+    return res.data;
   } catch (error) {
     dispatch({
       type: types.LOGIN_ADMIN_ERROR,

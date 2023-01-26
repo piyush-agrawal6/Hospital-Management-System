@@ -1,9 +1,13 @@
 import { Table } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import Topbar from "../../GlobalFiles/Topbar";
 
 const Patient_Details = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const columns = [
     { title: "Id", dataIndex: "Id", key: "Id" },
     { title: "Patient Name", dataIndex: "Patient_Name", key: "Patient Name" },
@@ -12,7 +16,7 @@ const Patient_Details = () => {
     { title: "Report Ref", dataIndex: "Report_Ref", key: "Report Ref" },
   ];
 
-  const data = [
+  const Datas = [
     {
       key: 1,
       Id: "ERFCE34",
@@ -31,6 +35,14 @@ const Patient_Details = () => {
     },
   ];
 
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
+
   return (
     <>
       <div className="container">
@@ -40,7 +52,7 @@ const Patient_Details = () => {
           <div className="Payment_Page">
             {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
             <div className="patientBox">
-              <Table columns={columns} dataSource={data} />
+              <Table columns={columns} dataSource={Datas} />
             </div>
           </div>
         </div>

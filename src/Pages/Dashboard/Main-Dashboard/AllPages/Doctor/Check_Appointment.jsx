@@ -1,8 +1,12 @@
 import { Table } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Check_Appointment = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const columns = [
     { title: "Patient Name", dataIndex: "patientName", key: "patientName" },
     { title: "Mobile", dataIndex: "mobile", key: "mobile" },
@@ -11,7 +15,7 @@ const Check_Appointment = () => {
     { title: "Date", dataIndex: "date", key: "date" },
   ];
 
-  const data = [
+  const Datas = [
     {
       key: 1,
       patientName: "ERFCE34",
@@ -22,6 +26,14 @@ const Check_Appointment = () => {
     },
   ];
 
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "doctor") {
+    return <Navigate to={"/dashboard"} />;
+  }
+
   return (
     <>
       <div className="container">
@@ -31,7 +43,7 @@ const Check_Appointment = () => {
             <h1 style={{ marginBottom: "2rem" }}>Appointment Details</h1>
             {/* <h1 style={{ marginBottom: "2rem" }}>Patient Details</h1> */}
             <div className="patientBox">
-              <Table columns={columns} dataSource={data} />
+              <Table columns={columns} dataSource={Datas} />
             </div>
           </div>
         </div>

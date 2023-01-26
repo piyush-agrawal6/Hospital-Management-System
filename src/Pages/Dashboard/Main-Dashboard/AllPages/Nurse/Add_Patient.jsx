@@ -12,6 +12,7 @@ import {
   GetSingleBed,
 } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import { Navigate } from "react-router-dom";
 
 const notify = (text) => toast(text);
 
@@ -26,10 +27,9 @@ const Add_Patient = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    data: { user },
-  } = useSelector((store) => store.auth);
+  const { data } = useSelector((store) => store.auth);
 
+  console.log(data);
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
@@ -66,7 +66,7 @@ const Add_Patient = () => {
     bloodGroup: "",
     DOB: "",
     password: "",
-    nurseID: user._id,
+    nurseID: data?.user._id,
     docID: "",
     details: "",
   };
@@ -104,6 +104,10 @@ const Add_Patient = () => {
         }
         if (res.message === "Available") {
           dispatch(AddPatients(AddPatient)).then((item) => {
+            if (item.message === "Patient already exists") {
+              setLoading(false);
+              return notify("Patient already exists");
+            }
             let data = {
               patientID: item._id,
               occupied: "occupied",
@@ -150,6 +154,14 @@ const Add_Patient = () => {
   //     <div style={{ marginTop: 8 }}>Upload</div>
   //   </div>
   // );
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "nurse") {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   return (
     <>

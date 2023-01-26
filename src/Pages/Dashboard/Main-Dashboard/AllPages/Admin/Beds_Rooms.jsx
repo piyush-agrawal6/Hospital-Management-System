@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { dischargePatient, GetBeds } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Beds_Rooms = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const dispatch = useDispatch();
 
   const { beds } = useSelector((state) => state.data);
@@ -20,6 +23,10 @@ const Beds_Rooms = () => {
   useEffect(() => {
     dispatch(GetBeds());
   }, [dispatch]);
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <>

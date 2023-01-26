@@ -92,19 +92,7 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
-            {user?.userType === "nurse" ? (
-              <Link className="link" activeclassname="active" to={"/rooms"}>
-                <div className="icon">
-                  <MdBedroomChild className="mainIcon" />
-                </div>
-                <div
-                  style={{ display: isOpen ? "block" : "none" }}
-                  className="link_text"
-                >
-                  Beds
-                </div>
-              </Link>
-            ) : null}
+
             {user?.userType === "nurse" ? (
               <Link
                 className="link"
@@ -196,7 +184,7 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
-            {user?.userType === "admin" ? (
+            {/* {user?.userType === "admin" ? (
               <Link
                 className="link"
                 activeclassname="active"
@@ -212,20 +200,20 @@ const Sidebar = () => {
                   Payments
                 </div>
               </Link>
-            ) : null}
-            {user?.userType === "admin" ? (
-              <Link className="link" activeclassname="active" to={"/rooms"}>
-                <div className="icon">
-                  <MdBedroomChild className="mainIcon" />
-                </div>
-                <div
-                  style={{ display: isOpen ? "block" : "none" }}
-                  className="link_text"
-                >
-                  Beds
-                </div>
-              </Link>
-            ) : null}
+            ) : null} */}
+
+            <Link className="link" activeclassname="active" to={"/rooms"}>
+              <div className="icon">
+                <MdBedroomChild className="mainIcon" />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                Beds
+              </div>
+            </Link>
+
             {user?.userType === "doctor" ? (
               <Link
                 className="link"

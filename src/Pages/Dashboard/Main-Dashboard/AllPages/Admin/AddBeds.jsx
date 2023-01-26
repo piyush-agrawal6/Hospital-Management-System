@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { AddBed } from "../../../../../Redux/Datas/action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navigate } from "react-router-dom";
 const notify = (text) => toast(text);
 
 const AddBeds = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const InitData = {
     roomNumber: "none",
     bedNumber: "",
@@ -30,6 +33,14 @@ const AddBeds = () => {
     setBedData(InitData);
     notify("Bed Added");
   };
+
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
 
   return (
     <>

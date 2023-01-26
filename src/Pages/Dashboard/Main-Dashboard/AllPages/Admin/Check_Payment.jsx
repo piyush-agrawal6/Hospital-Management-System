@@ -1,9 +1,13 @@
 import { Table } from "antd";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import "./CSS/Payment.css";
 
 const Check_Payment = () => {
+  const { data } = useSelector((store) => store.auth);
+
   const columns = [
     { title: "Id", dataIndex: "Id", key: "Id" },
     { title: "Patient Name", dataIndex: "Patient_Name", key: "Patient Name" },
@@ -13,72 +17,79 @@ const Check_Payment = () => {
     { title: "Total Cost", dataIndex: "Total_Cost", key: "Total Cost" },
   ];
 
-  const data = [
-    {
-      key: 1,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 2,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 3,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 4,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 5,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 6,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-    {
-      key: 7,
-      Id: "ERFCE34",
-      Patient_Name: "The Rock",
-      Date: "12-09-2022",
-      Checked_By: "Dr.Rajendra Patel",
-      Report_Ref: "ERODEII334l",
-      Total_Cost: "₹ 3000",
-    },
-  ];
+  // const data = [
+  //   {
+  //     key: 1,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 2,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 3,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 4,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 5,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 6,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  //   {
+  //     key: 7,
+  //     Id: "ERFCE34",
+  //     Patient_Name: "The Rock",
+  //     Date: "12-09-2022",
+  //     Checked_By: "Dr.Rajendra Patel",
+  //     Report_Ref: "ERODEII334l",
+  //     Total_Cost: "₹ 3000",
+  //   },
+  // ];
 
+  if (data?.isAuthticated === false) {
+    return <Navigate to={"/"} />;
+  }
+
+  if (data?.user.userType !== "admin") {
+    return <Navigate to={"/dashboard"} />;
+  }
   return (
     <>
       <div className="container">
@@ -87,11 +98,11 @@ const Check_Payment = () => {
           <div className="Payment_Page">
             <h1 style={{ marginBottom: "2rem" }}>All Payments</h1>
             <div className="patientBox">
-              <Table
+              {/* <Table
                 columns={columns}
                 dataSource={data}
                 className="PaymentTable"
-              />
+              /> */}
             </div>
           </div>
         </div>
