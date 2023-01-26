@@ -6,6 +6,9 @@ import "./CSS/Add_Ambu.css";
 import { useDispatch } from "react-redux";
 import { AmbulanceRegister } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const notify = (text) => toast(text);
 
 const Add_Ambulance = () => {
   let [ambuType, setambuType] = useState("none");
@@ -35,10 +38,12 @@ const Add_Ambulance = () => {
     };
     console.log(data);
     dispatch(AmbulanceRegister(data));
+    notify("Ambulance Added");
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <Sidebar />
         <div className="AfterSideBar">
@@ -72,6 +77,7 @@ const Add_Ambulance = () => {
                     name="type"
                     value={ambuType}
                     onChange={HandleAmbuChange}
+                    required
                   />
                 </div>
               </div>
@@ -84,6 +90,7 @@ const Add_Ambulance = () => {
                     name="charges"
                     value={AmbuData.charges}
                     onChange={HandleAmbuChange}
+                    required
                   />
                 </div>
               </div>
@@ -96,6 +103,7 @@ const Add_Ambulance = () => {
                     name="ambulanceID"
                     value={AmbuData.ambulanceID}
                     onChange={HandleAmbuChange}
+                    required
                   />
                 </div>
               </div>
@@ -108,6 +116,7 @@ const Add_Ambulance = () => {
                     name="ambulanceDriver"
                     value={AmbuData.ambulanceDriver}
                     onChange={HandleAmbuChange}
+                    required
                   />
                 </div>
               </div>
@@ -120,6 +129,7 @@ const Add_Ambulance = () => {
                     name="number"
                     value={AmbuData.number}
                     onChange={HandleAmbuChange}
+                    required
                   />
                 </div>
               </div>

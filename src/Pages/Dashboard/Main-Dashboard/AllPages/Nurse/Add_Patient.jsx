@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { message, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import doctor from "../../../../../img/doctoravatar.png";
-import { useDispatch } from "react-redux";
-import { AddPatients, CreateBeds } from "../../../../../Redux/Datas/action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AddPatients,
+  CreateBeds,
+  EditSingleBed,
+  GetSingleBed,
+} from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Add_Patient = () => {
@@ -15,6 +20,10 @@ const Add_Patient = () => {
 
   const dispatch = useDispatch();
 
+  const {
+    data: { user },
+  } = useSelector((store) => store.auth);
+
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
@@ -25,6 +34,15 @@ const Add_Patient = () => {
       message.error("Image must smaller than 2MB!");
     }
     return isJpgOrPng && isLt2M;
+  };
+
+  const [bedDetails, setbedDetails] = useState({
+    bedNumber: "",
+    roomNumber: "",
+  });
+
+  const HandleBedchange = (e) => {
+    setbedDetails({ ...bedDetails, [e.target.name]: e.target.value });
   };
 
   const [loading, setLoading] = useState(false);
@@ -44,10 +62,9 @@ const Add_Patient = () => {
     bloodGroup: "",
     DOB: "",
     password: "",
-    nurseID: "63d0b33da06d18362e78513d",
+    nurseID: user._id,
     docID: "63ce6b5b399dc267cb06b99a",
     details: "",
-    image: "image",
   });
 
   const HandleAppointment = (e) => {
@@ -57,16 +74,23 @@ const Add_Patient = () => {
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
     try {
-      dispatch(AddPatients(AddPatient)).then((res) => {
-        let data = {
-          bedNumber: Date.now(),
-          roomNumber: Date.now(),
-          patientID: res._id,
-        };
-        dispatch(CreateBeds(data)).then((res) => {
-          console.log(res);
-        });
+      console.log(bedDetails);
+      dispatch(GetSingleBed(bedDetails)).then((res) => {
+        if (res.message === "Available") {
+          dispatch(AddPatients(AddPatient)).then((item) => {
+            let data = {
+              patientID: item._id,
+              occupied: "occupied",
+            };
+            dispatch(EditSingleBed(data, res.id)).then((ele) =>
+              console.log(ele)
+            );
+          });
+        } else {
+          console.log(res.message);
+        }
       });
+      //
     } catch (error) {
       console.log(error);
     }
@@ -233,6 +257,31 @@ const Add_Patient = () => {
                     name="address"
                     value={AddPatient.address}
                     onChange={HandleAppointment}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label>Bed Number</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="bed No"
+                    name="bedNumber"
+                    value={bedDetails.bedNumber}
+                    onChange={HandleBedchange}
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Room Number</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="room no"
+                    name="roomNumber"
+                    value={bedDetails.roomNumber}
+                    onChange={HandleBedchange}
                   />
                 </div>
               </div>

@@ -182,3 +182,85 @@ export const UpdateNurse = (data, id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+//GET BEDS
+
+export const AddBed = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.ADD_BEDS_REQUEST });
+    const res = await axios.post(
+      "https://zany-gray-clam-gear.cyclic.app/beds/add",
+      data
+    );
+    console.log(res);
+    // dispatch({
+    //   type: types.ADD_BEDS_SUCCESS,
+    //   payload: {
+
+    //   },
+    // });
+    return res.data;
+  } catch (error) {
+    dispatch({
+      type: types.ADD_BEDS_ERROR,
+      payload: {
+        message: error,
+      },
+    });
+  }
+};
+
+// GET SINGLE BED
+
+export const GetSingleBed = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
+    const res = await axios.post(
+      "https://zany-gray-clam-gear.cyclic.app/beds/single",
+      data
+    );
+    // console.log(res);
+    return res.data;
+    // dispatch({
+    //   type: types.GET_SINGLE_BEDS_SUCCESS,
+    //   payload: {
+
+    //   },
+    // });
+  } catch (error) {
+    // dispatch({
+    //   type: types.GET_SINGLE_BEDS_ERROR,
+    //   payload: {
+    //     message: error,
+    //   },
+    // });
+    console.log(error);
+  }
+};
+// EDIT SINGLE BED
+
+export const EditSingleBed = (data, id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
+    const res = await axios.patch(
+      `https://zany-gray-clam-gear.cyclic.app/beds/${id}`,
+      data
+    );
+    // console.log(res);
+    return res.data;
+    // dispatch({
+    //   type: types.GET_SINGLE_BEDS_SUCCESS,
+    //   payload: {
+
+    //   },
+    // });
+  } catch (error) {
+    // dispatch({
+    //   type: types.GET_SINGLE_BEDS_ERROR,
+    //   payload: {
+    //     message: error,
+    //   },
+    // });
+    console.log(error);
+  }
+};

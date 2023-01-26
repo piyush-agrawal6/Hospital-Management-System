@@ -13,8 +13,11 @@ import { MdBedroomChild } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
 import { FiLogOut } from "react-icons/fi";
-import { GrUserAdmin } from "react-icons/gr";
+import { RiAdminLine } from "react-icons/ri";
+import { TbBed } from "react-icons/tb";
+import { MdDashboardCustomize } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -43,6 +46,18 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="bottomSection">
+            <Link className="link" activeclassname="active" to={"/dashboard"}>
+              <div className="icon">
+                <MdDashboardCustomize className="mainIcon" />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                DashBoard
+              </div>
+            </Link>
+
             {user?.userType === "nurse" ? (
               <Link
                 className="link"
@@ -136,7 +151,10 @@ const Sidebar = () => {
             {user?.userType === "admin" ? (
               <Link className="link" activeclassname="active" to={"/admin"}>
                 <div className="icon">
-                  <GrUserAdmin className="mainIcon" />
+                  <RiAdminLine
+                    className="mainIcon"
+                    style={{ color: "white" }}
+                  />
                 </div>
                 <div
                   style={{ display: isOpen ? "block" : "none" }}
@@ -146,6 +164,21 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
+
+            {user?.userType === "admin" ? (
+              <Link className="link" activeclassname="active" to={"/addbeds"}>
+                <div className="icon">
+                  <TbBed className="mainIcon" />
+                </div>
+                <div
+                  style={{ display: isOpen ? "block" : "none" }}
+                  className="link_text"
+                >
+                  Add Beds
+                </div>
+              </Link>
+            ) : null}
+
             {user?.userType === "admin" ? (
               <Link
                 className="link"

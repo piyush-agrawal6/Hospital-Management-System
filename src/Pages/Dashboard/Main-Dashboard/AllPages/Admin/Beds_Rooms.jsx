@@ -6,17 +6,11 @@ import { GetBeds } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Beds_Rooms = () => {
-  const columns = [
-    { title: "Bed Id", dataIndex: "bedNumber", key: "bedNumber" },
-    { title: "Occupied", dataIndex: "occupied", key: "occupied" },
-    // { title: "Date", dataIndex: "Date", key: "Date" },
-    // { title: "Checked By", dataIndex: "Checked_By", key: "Checked By" },
-    // { title: "Report Ref", dataIndex: "Report_Ref", key: "Report Ref" },
-  ];
-
   const dispatch = useDispatch();
 
   const [data, setData] = useState([]);
+
+  console.log(data);
 
   useEffect(() => {
     try {
@@ -37,11 +31,48 @@ const Beds_Rooms = () => {
           <div className="Payment_Page">
             <h1 style={{ marginBottom: "2rem" }}>All Beds</h1>
             <div className="patientBox">
-              <Table
-                columns={columns}
-                dataSource={data}
-                className="PaymentTable"
-              />
+              <table>
+                <thead>
+                  <tr>
+                    <th>Room</th>
+                    <th>Bed</th>
+                    <th>Status</th>
+                    <th>Patient</th>
+                    <th>Disease</th>
+                    <th>Doctor</th>
+                    <th>Edit</th>
+                    <th>discharge</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data?.map((ele) => {
+                    return (
+                      <tr>
+                        <td>{ele.roomNumber}</td>
+                        <td style={{ marginLeft: "1rem" }}>{ele.bedNumber}</td>
+                        <td>{ele.occupied}</td>
+                        <td>
+                          {ele.patientID
+                            ? ele.patientID.patientName
+                            : "No Data"}
+                        </td>
+                        <td>
+                          {ele.patientID?.disease
+                            ? ele.patientID.disease
+                            : "No Data"}
+                        </td>
+                        <td>
+                          {ele.patientID?.docID
+                            ? ele.patientID.docID.docName
+                            : "No Data"}
+                        </td>
+                        <td>Edit</td>
+                        <td>Discharge</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

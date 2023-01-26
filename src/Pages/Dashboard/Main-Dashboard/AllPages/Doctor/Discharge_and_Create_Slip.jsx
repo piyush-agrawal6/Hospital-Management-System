@@ -83,6 +83,7 @@ const Discharge_and_Create_Slip = () => {
                     name="docName"
                     value={ReportValue.docName}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -95,6 +96,7 @@ const Discharge_and_Create_Slip = () => {
                     name="docDepartment"
                     value={ReportValue.docDepartment}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -107,6 +109,7 @@ const Discharge_and_Create_Slip = () => {
                     name="docMobile"
                     value={ReportValue.docMobile}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>

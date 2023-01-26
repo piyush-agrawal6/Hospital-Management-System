@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AdminRegister } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import admin from "../../../../../img/admin.jpg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const notify = (text) => toast(text);
 
 const Add_Admin = () => {
   const [AdminValue, setAdminValue] = useState({
@@ -27,128 +31,140 @@ const Add_Admin = () => {
     e.preventDefault();
     console.log(AdminValue);
     dispatch(AdminRegister(AdminValue));
+    notify("Admin Added");
   };
 
   return (
-    <div className="container">
-      <Sidebar />
-      <div className="AfterSideBar">
-        <div className="Main_Add_Doctor_div">
-          <h1>Add Admin</h1>
-          <img src={"nurse"} alt="doctor" className="avatarimg" />
-          <form onSubmit={HandleDoctorSubmit}>
-            <div>
-              <label>Name</label>
-              <div className="inputdiv">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  name="adminName"
-                  value={AdminValue.adminName}
-                  onChange={HandleDoctorChange}
-                />
+    <>
+      <ToastContainer />
+      <div className="container">
+        <Sidebar />
+        <div className="AfterSideBar">
+          <div className="Main_Add_Doctor_div">
+            <h1>Add Admin</h1>
+            <img src={admin} alt="doctor" className="avatarimg" />
+            <form onSubmit={HandleDoctorSubmit}>
+              <div>
+                <label>Name</label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    name="adminName"
+                    value={AdminValue.adminName}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Age</label>
-              <div className="inputdiv">
-                <input
-                  type="number"
-                  placeholder="Age"
-                  name="age"
-                  value={AdminValue.age}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Age</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="Age"
+                    name="age"
+                    value={AdminValue.age}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Contact Number</label>
-              <div className="inputdiv">
-                <input
-                  type="number"
-                  placeholder="Emergency Number"
-                  name="mobile"
-                  value={AdminValue.mobile}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Contact Number</label>
+                <div className="inputdiv">
+                  <input
+                    type="number"
+                    placeholder="Emergency Number"
+                    name="mobile"
+                    value={AdminValue.mobile}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Email</label>
-              <div className="inputdiv">
-                <input
-                  type="email"
-                  placeholder="abc@abc.com"
-                  name="email"
-                  value={AdminValue.email}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Email</label>
+                <div className="inputdiv">
+                  <input
+                    type="email"
+                    placeholder="abc@abc.com"
+                    name="email"
+                    value={AdminValue.email}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Gender</label>
-              <div className="inputdiv">
-                <select
-                  name="gender"
-                  value={AdminValue.gender}
-                  onChange={HandleDoctorChange}
-                >
-                  <option value="Choose Gender">Choose Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Others">Others</option>
-                </select>
+              <div>
+                <label>Gender</label>
+                <div className="inputdiv">
+                  <select
+                    name="gender"
+                    value={AdminValue.gender}
+                    onChange={HandleDoctorChange}
+                    required
+                  >
+                    <option value="Choose Gender">Choose Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Others">Others</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Birthdate</label>
-              <div className="inputdiv">
-                <input
-                  type="date"
-                  placeholder="dd-mm-yy"
-                  name="DOB"
-                  value={AdminValue.DOB}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Birthdate</label>
+                <div className="inputdiv">
+                  <input
+                    type="date"
+                    placeholder="dd-mm-yy"
+                    name="DOB"
+                    value={AdminValue.DOB}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Address</label>
-              <div className="inputdiv adressdiv">
-                <input
-                  type="text"
-                  placeholder="Address line 1"
-                  name="address"
-                  value={AdminValue.address}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Address</label>
+                <div className="inputdiv adressdiv">
+                  <input
+                    type="text"
+                    placeholder="Address line 1"
+                    name="address"
+                    value={AdminValue.address}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Education</label>
-              <div className="inputdiv">
-                <input
-                  type="text"
-                  placeholder="eg.MBBS"
-                  name="education"
-                  value={AdminValue.education}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Education</label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="eg.MBBS"
+                    name="education"
+                    value={AdminValue.education}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <label>Password</label>
-              <div className="inputdiv">
-                <input
-                  type="text"
-                  placeholder="Password"
-                  name="password"
-                  value={AdminValue.password}
-                  onChange={HandleDoctorChange}
-                />
+              <div>
+                <label>Password</label>
+                <div className="inputdiv">
+                  <input
+                    type="text"
+                    placeholder="Password"
+                    name="password"
+                    value={AdminValue.password}
+                    onChange={HandleDoctorChange}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-            {/* <div>
+              {/* <div>
           <label>Image</label>
           <div className="inputdiv">
             <Upload
@@ -170,13 +186,14 @@ const Add_Admin = () => {
           </div>
         </div> */}
 
-            <button type="submit" className="formsubmitbutton">
-              Submit
-            </button>
-          </form>
+              <button type="submit" className="formsubmitbutton">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
