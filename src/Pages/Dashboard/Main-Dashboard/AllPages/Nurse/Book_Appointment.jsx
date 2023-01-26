@@ -4,6 +4,9 @@ import "./CSS/Book_appointment.css";
 import { useDispatch } from "react-redux";
 import { CreateBooking } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const notify = (text) => toast(text);
 
 const Book_Appointment = () => {
   const [showenterProblem, setEnterProblem] = useState("none");
@@ -19,7 +22,7 @@ const Book_Appointment = () => {
 
   const dispatch = useDispatch();
 
-  const [BookAppoint, setBookAppoint] = useState({
+  const InitValue = {
     patientName: "",
     patientID: Date.now(),
     age: "",
@@ -30,7 +33,9 @@ const Book_Appointment = () => {
     department: "",
     date: "",
     time: "",
-  });
+  };
+
+  const [BookAppoint, setBookAppoint] = useState(InitValue);
 
   const HandleAppointment = (e) => {
     setBookAppoint({ ...BookAppoint, [e.target.name]: e.target.value });
@@ -39,10 +44,13 @@ const Book_Appointment = () => {
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
     dispatch(CreateBooking(BookAppoint));
+    notify("Appointment Booked");
+    setBookAppoint(InitValue);
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <Sidebar />
         <div className="AfterSideBar">
@@ -59,6 +67,7 @@ const Book_Appointment = () => {
                     name="patientName"
                     value={BookAppoint.patientName}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -72,6 +81,7 @@ const Book_Appointment = () => {
                     name="age"
                     value={BookAppoint.age}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -83,6 +93,7 @@ const Book_Appointment = () => {
                     name="gender"
                     value={BookAppoint.gender}
                     onChange={HandleAppointment}
+                    required
                   >
                     <option value="Choose Blood Group">Select Gender</option>
                     <option value="Male">Male</option>
@@ -101,6 +112,7 @@ const Book_Appointment = () => {
                     name="mobile"
                     value={BookAppoint.mobile}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -115,6 +127,7 @@ const Book_Appointment = () => {
                       onProblemChange();
                       HandleAppointment(e);
                     }}
+                    required
                   >
                     <option value="Choose Blood Group">Select Disease</option>
                     {CommonProblem.map((ele, i) => {
@@ -138,6 +151,7 @@ const Book_Appointment = () => {
                     name="problem"
                     value={BookAppoint.problem}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -151,20 +165,31 @@ const Book_Appointment = () => {
                     name="address"
                     value={BookAppoint.address}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
               {/* DEPARTMENT SECTION */}
+
               <div>
-                <label>Department (Optional)</label>
+                <label>Department</label>
                 <div className="inputdiv">
-                  <input
-                    type={"text"}
-                    placeholder="Choose your Department"
+                  <select
                     name="department"
                     value={BookAppoint.department}
                     onChange={HandleAppointment}
-                  />
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="ENT">ENT</option>
+                    <option value="Ophthalmologist">Ophthalmologist</option>
+                    <option value="Anesthesiologist">Anesthesiologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Oncologist">Oncologist</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                  </select>
                 </div>
               </div>
               {/* APPOINTMENT DATE  */}
@@ -177,6 +202,7 @@ const Book_Appointment = () => {
                     name="date"
                     value={BookAppoint.date}
                     onChange={HandleAppointment}
+                    required
                   />
                   <input
                     type={"time"}
@@ -184,6 +210,7 @@ const Book_Appointment = () => {
                     name="time"
                     value={BookAppoint.time}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>

@@ -132,13 +132,10 @@ export const GetBeds = () => async (dispatch) => {
     dispatch({ type: types.GET_BED_REQUEST });
     const res = await axios.get("https://zany-gray-clam-gear.cyclic.app/beds");
     console.log(res);
-    // dispatch({
-    //   type: types.GET_BED_SUCCESS,
-    //   payload: {
-
-    //   },
-    // });
-    return res.data;
+    dispatch({
+      type: types.GET_BED_SUCCESS,
+      payload: res.data,
+    });
   } catch (error) {
     dispatch({
       type: types.GET_BED_ERROR,
@@ -163,7 +160,6 @@ export const CreateBooking = (data) => async (dispatch) => {
     console.log(error);
   }
 };
-
 
 //GET BEDS
 export const AddBed = (data) => async (dispatch) => {
@@ -217,8 +213,8 @@ export const GetSingleBed = (data) => async (dispatch) => {
     console.log(error);
   }
 };
-// EDIT SINGLE BED
 
+// EDIT SINGLE BED
 export const EditSingleBed = (data, id) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
@@ -237,6 +233,33 @@ export const EditSingleBed = (data, id) => async (dispatch) => {
   } catch (error) {
     // dispatch({
     //   type: types.GET_SINGLE_BEDS_ERROR,
+    //   payload: {
+    //     message: error,
+    //   },
+    // });
+    console.log(error);
+  }
+};
+
+// DISCHARGE PATIENT
+export const dischargePatient = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.DISCHARGE_PATIENT_REQUEST });
+    const res = await axios.patch(
+      `https://zany-gray-clam-gear.cyclic.app/beds/discharge`,
+      data
+    );
+    console.log(res);
+    // return res.data;
+    // dispatch({
+    // type: types.DISCHARGE_PATIENT_SUCCESS,
+    //   payload: {
+
+    //   },
+    // });
+  } catch (error) {
+    // dispatch({
+    // type: types.DISCHARGE_PATIENT_ERROR,
     //   payload: {
     //     message: error,
     //   },

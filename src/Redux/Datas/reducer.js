@@ -12,27 +12,20 @@ const initialState = {
   Appointments: [],
 };
 
-export default function authReducer(state = initialState, { type, payload }) {
+export default function dataReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case types.LOGIN_NURSE_REQUEST:
+    case types.GET_BED_REQUEST:
       return {
         ...state,
-        userLogin: { loading: true, error: false },
+        loading: true,
       };
-    case types.LOGIN_NURSE_SUCCESS:
+    case types.GET_BED_SUCCESS:
       return {
         ...state,
-        userLogin: { loading: false, error: false, message: payload.message },
-        data: {
-          report: payload.report,
-          user: payload.user,
-        },
+        loading: false,
+        beds: payload,
       };
-    case types.LOGIN_NURSE_ERROR:
-      return {
-        ...state,
-        userLogin: { loading: false, error: true, message: payload.message },
-      };
+
     default:
       return state;
   }

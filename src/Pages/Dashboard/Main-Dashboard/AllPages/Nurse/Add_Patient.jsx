@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { message, Upload } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import doctor from "../../../../../img/doctoravatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,6 +22,8 @@ const Add_Patient = () => {
     reader.readAsDataURL(img);
   };
 
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   const {
@@ -41,19 +42,17 @@ const Add_Patient = () => {
     return isJpgOrPng && isLt2M;
   };
 
-  const [bedDetails, setbedDetails] = useState({
+  const initBed = {
     bedNumber: "",
     roomNumber: "",
-  });
+  };
+  const [bedDetails, setbedDetails] = useState(initBed);
 
   const HandleBedchange = (e) => {
     setbedDetails({ ...bedDetails, [e.target.name]: e.target.value });
   };
 
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
-
-  const [AddPatient, setAddPatient] = useState({
+  const InitData = {
     patientName: "",
     patientID: Date.now(),
     age: "",
@@ -70,7 +69,8 @@ const Add_Patient = () => {
     nurseID: user._id,
     docID: "",
     details: "",
-  });
+  };
+  const [AddPatient, setAddPatient] = useState(InitData);
 
   const HandleAppointment = (e) => {
     setAddPatient({ ...AddPatient, [e.target.name]: e.target.value });
@@ -78,16 +78,28 @@ const Add_Patient = () => {
 
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
+
+    if (
+      AddPatient.gender === "" ||
+      AddPatient.department === "" ||
+      AddPatient.docID === "" ||
+      AddPatient.bloodGroup === ""
+    ) {
+      return notify("Please Enter All the Requried Feilds");
+    }
     try {
-      console.log(bedDetails);
+      setLoading(true);
       dispatch(GetSingleBed(bedDetails)).then((res) => {
         if (res.message === "Bed not found") {
+          setLoading(false);
           return notify("Bed not found");
         }
         if (res.message === "Occupied") {
+          setLoading(false);
           return notify("Bed already occupied");
         }
         if (res.message === "No Bed") {
+          setLoading(false);
           return notify("Bed not found");
         }
         if (res.message === "Available") {
@@ -97,17 +109,23 @@ const Add_Patient = () => {
               occupied: "occupied",
             };
             notify("Patient Added");
+
             dispatch(EditSingleBed(data, res.id)).then((ele) =>
               console.log(ele)
             );
             notify("Bed updated");
+            setLoading(false);
+            setAddPatient(InitData);
+            setbedDetails(initBed);
           });
         } else {
+          setLoading(false);
           console.log("error");
         }
       });
       //
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -209,7 +227,7 @@ const Add_Patient = () => {
                     onChange={HandleAppointment}
                     required
                   >
-                    <option value="Choose Blood Group">Select Gender</option>
+                    <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
@@ -324,7 +342,7 @@ const Add_Patient = () => {
                     onChange={HandleAppointment}
                     required
                   >
-                    <option value="General">Select</option>
+                    <option value="">Select</option>
                     <option value="Cardiology">Cardiology</option>
                     <option value="Neurology">Neurology</option>
                     <option value="ENT">ENT</option>
@@ -364,7 +382,7 @@ const Add_Patient = () => {
                     onChange={HandleAppointment}
                     required
                   >
-                    <option value="Choose Blood Group">Select</option>
+                    <option value="">Select</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -419,7 +437,7 @@ const Add_Patient = () => {
                 className="formsubmitbutton"
                 style={{ width: "20%" }}
               >
-                Submit
+                {loading ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>

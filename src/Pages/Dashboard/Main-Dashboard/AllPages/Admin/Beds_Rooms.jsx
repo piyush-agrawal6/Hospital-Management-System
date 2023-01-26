@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { GetBeds } from "../../../../../Redux/Datas/action";
+import { useDispatch, useSelector } from "react-redux";
+import { dischargePatient, GetBeds } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Beds_Rooms = () => {
   const dispatch = useDispatch();
 
-  const [data, setData] = useState([]);
+  const { beds } = useSelector((state) => state.data);
 
-  console.log(data);
+  const DischargePatient = (id) => {
+    let data = {
+      occupied: "available",
+      _id: id,
+    };
+    dispatch(dischargePatient(data));
+  };
 
   useEffect(() => {
-    try {
-      dispatch(GetBeds()).then((res) => {
-        console.log(res);
-        setData(res);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(GetBeds());
   }, [dispatch]);
 
   return (
@@ -43,7 +42,7 @@ const Beds_Rooms = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.map((ele) => {
+                  {beds?.map((ele) => {
                     return (
                       <tr>
                         <td>{ele.roomNumber}</td>
@@ -51,7 +50,8 @@ const Beds_Rooms = () => {
                         <td
                           style={{
                             color:
-                              ele.occupied === "available" ? "green" : "yellow",
+                              ele.occupied === "available" ? "green" : "orange",
+                            fontWeight: "bold",
                           }}
                         >
                           {ele.occupied}
@@ -83,6 +83,7 @@ const Beds_Rooms = () => {
                               cursor:
                                 ele.occupied === "available" ? "" : "pointer",
                             }}
+                            onClick={() => DischargePatient(ele._id)}
                           >
                             Discharge
                           </button>
