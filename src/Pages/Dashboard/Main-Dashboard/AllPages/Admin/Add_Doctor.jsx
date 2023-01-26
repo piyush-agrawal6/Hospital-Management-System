@@ -233,7 +233,7 @@ const AddDoctor = () => {
                     onChange={HandleDoctorChange}
                     required
                   >
-                    <option value="Choose Blood Group">Select</option>
+                    <option value="General">Select</option>
                     <option value="Cardiology">Cardiology</option>
                     <option value="Neurology">Neurology</option>
                     <option value="ENT">ENT</option>

@@ -204,3 +204,18 @@ export const authLogout = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+//update nurse
+export const UpdateNurse = (data, id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.EDIT_NURSE_REQUEST });
+    const res = await axios.patch(
+      `https://zany-gray-clam-gear.cyclic.app/nurses/${id}`,
+      data
+    );
+    console.log(res);
+    dispatch({ type: types.EDIT_NURSE_SUCCESS, payload: res.data.user });
+  } catch (error) {
+    console.log(error);
+  }
+};

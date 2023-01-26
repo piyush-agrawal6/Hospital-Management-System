@@ -5,20 +5,21 @@ import { GiMeditation } from "react-icons/gi";
 import { AiFillCalendar } from "react-icons/ai";
 import { MdBloodtype } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { MdMail } from "react-icons/md";
 import { BsHouseFill } from "react-icons/bs";
-import { MdOutlineCastForEducation, MdFolderSpecial } from "react-icons/md";
+import { MdOutlineCastForEducation } from "react-icons/md";
 import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, message, Modal } from "antd";
-import { UpdateNurse } from "../../../../../Redux/Datas/action";
+import { UpdateNurse } from "../../../../../Redux/auth/action";
+
 const Nurse_Profile = () => {
   const {
     data: { user },
   } = useSelector((state) => state.auth);
-  console.log(user);
+
   const dispatch = useDispatch();
+
   let commonStyling = {
     display: "flex",
     justifyContent: "left",
@@ -26,6 +27,7 @@ const Nurse_Profile = () => {
     alignItems: "center",
     padding: "10px",
   };
+
   const [formData, setFormData] = useState({
     nurseName: user.nurseName,
     age: user.age,
@@ -33,16 +35,17 @@ const Nurse_Profile = () => {
     bloodGroup: user.bloodGroup,
     education: user.education,
     mobile: user.mobile,
-    department: user.department,
     DOB: user.DOB,
     ID: user._id,
   });
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+
   const showModal = () => {
     setOpen(true);
   };
+
   const handleOk = () => {
     setConfirmLoading(true);
     setTimeout(() => {
@@ -50,14 +53,13 @@ const Nurse_Profile = () => {
       setConfirmLoading(false);
     }, 2000);
   };
+
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = (text) => {
     messageApi.success(text);
   };
-  const error = (text) => {
-    messageApi.error(text);
-  };
+
   const handleCancel = () => {
     setOpen(false);
   };
@@ -65,10 +67,10 @@ const Nurse_Profile = () => {
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleFormSubmit = () => {
-    console.log(formData);
-    // dispatch(UpdateNurse(formData, user._id));
-    // success("user updated");
+    dispatch(UpdateNurse(formData, user._id));
+    success("user updated");
     handleOk();
   };
 
@@ -151,12 +153,6 @@ const Nurse_Profile = () => {
                     <option value="female">Female</option>
                     <option value="other">Others</option>
                   </select>
-                  <select name="department" onChange={handleFormChange}>
-                    <option value="">Select department</option>
-                    <option value="a">a</option>
-                    <option value="b">b</option>
-                    <option value="c">c</option>
-                  </select>
                   <input
                     name="bloodGroup"
                     value={formData.bloodGroup}
@@ -202,10 +198,7 @@ const Nurse_Profile = () => {
                   <BsHouseFill />
                   <p>{user?.age}</p>
                 </div>
-                <div style={commonStyling}>
-                  <BsHouseFill />
-                  <p>{user?.department}</p>
-                </div>
+
                 <div style={commonStyling}>
                   <MdOutlineCastForEducation />
                   <p>{user?.education}</p>

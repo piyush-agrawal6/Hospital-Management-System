@@ -75,6 +75,13 @@ export default function authReducer(state = initialState, { type, payload }) {
           user: payload.user,
         },
       };
+    case types.EDIT_NURSE_SUCCESS:
+      return {
+        ...state,
+        data: {
+          user: payload,
+        },
+      };
     case types.LOGIN_ADMIN_ERROR:
       return {
         ...state,

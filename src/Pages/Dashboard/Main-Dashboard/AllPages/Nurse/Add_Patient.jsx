@@ -3,6 +3,9 @@ import { message, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import doctor from "../../../../../img/doctoravatar.png";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   AddPatients,
   CreateBeds,
@@ -10,6 +13,8 @@ import {
   GetSingleBed,
 } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+
+const notify = (text) => toast(text);
 
 const Add_Patient = () => {
   const getBase64 = (img, callback) => {
@@ -63,7 +68,7 @@ const Add_Patient = () => {
     DOB: "",
     password: "",
     nurseID: user._id,
-    docID: "63ce6b5b399dc267cb06b99a",
+    docID: "",
     details: "",
   });
 
@@ -76,18 +81,29 @@ const Add_Patient = () => {
     try {
       console.log(bedDetails);
       dispatch(GetSingleBed(bedDetails)).then((res) => {
+        if (res.message === "Bed not found") {
+          return notify("Bed not found");
+        }
+        if (res.message === "Occupied") {
+          return notify("Bed already occupied");
+        }
+        if (res.message === "No Bed") {
+          return notify("Bed not found");
+        }
         if (res.message === "Available") {
           dispatch(AddPatients(AddPatient)).then((item) => {
             let data = {
               patientID: item._id,
               occupied: "occupied",
             };
+            notify("Patient Added");
             dispatch(EditSingleBed(data, res.id)).then((ele) =>
               console.log(ele)
             );
+            notify("Bed updated");
           });
         } else {
-          console.log(res.message);
+          console.log("error");
         }
       });
       //
@@ -96,29 +112,30 @@ const Add_Patient = () => {
     }
   };
 
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
+  // const handleChange = (info) => {
+  //   if (info.file.status === "uploading") {
+  //     setLoading(true);
+  //     return;
+  //   }
+  //   if (info.file.status === "done") {
+  //     // Get this url from response in real world.
+  //     getBase64(info.file.originFileObj, (url) => {
+  //       setLoading(false);
+  //       setImageUrl(url);
+  //     });
+  //   }
+  // };
 
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
+  // const uploadButton = (
+  //   <div>
+  //     {loading ? <LoadingOutlined /> : <PlusOutlined />}
+  //     <div style={{ marginTop: 8 }}>Upload</div>
+  //   </div>
+  // );
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <Sidebar />
         <div className="AfterSideBar">
@@ -137,6 +154,7 @@ const Add_Patient = () => {
                     name="patientName"
                     value={AddPatient.patientName}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -150,6 +168,7 @@ const Add_Patient = () => {
                     name="age"
                     value={AddPatient.age}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -163,6 +182,7 @@ const Add_Patient = () => {
                     name="email"
                     value={AddPatient.email}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -175,6 +195,7 @@ const Add_Patient = () => {
                     name="date"
                     value={AddPatient.date}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -186,6 +207,7 @@ const Add_Patient = () => {
                     name="gender"
                     value={AddPatient.gender}
                     onChange={HandleAppointment}
+                    required
                   >
                     <option value="Choose Blood Group">Select Gender</option>
                     <option value="Male">Male</option>
@@ -204,6 +226,7 @@ const Add_Patient = () => {
                     name="DOB"
                     value={AddPatient.DOB}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -217,6 +240,7 @@ const Add_Patient = () => {
                     name="mobile"
                     value={AddPatient.mobile}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -230,6 +254,7 @@ const Add_Patient = () => {
                     name="details"
                     value={AddPatient.details}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -243,6 +268,7 @@ const Add_Patient = () => {
                     name="disease"
                     value={AddPatient.disease}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -257,6 +283,7 @@ const Add_Patient = () => {
                     name="address"
                     value={AddPatient.address}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>
@@ -270,6 +297,7 @@ const Add_Patient = () => {
                     name="bedNumber"
                     value={bedDetails.bedNumber}
                     onChange={HandleBedchange}
+                    required
                   />
                 </div>
               </div>
@@ -282,6 +310,7 @@ const Add_Patient = () => {
                     name="roomNumber"
                     value={bedDetails.roomNumber}
                     onChange={HandleBedchange}
+                    required
                   />
                 </div>
               </div>
@@ -289,20 +318,52 @@ const Add_Patient = () => {
               <div>
                 <label>Department</label>
                 <div className="inputdiv">
-                  <input
-                    type="text"
-                    placeholder="Department"
+                  <select
                     name="department"
                     value={AddPatient.department}
                     onChange={HandleAppointment}
-                  />
+                    required
+                  >
+                    <option value="General">Select</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="ENT">ENT</option>
+                    <option value="Ophthalmologist">Ophthalmologist</option>
+                    <option value="Anesthesiologist">Anesthesiologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Oncologist">Oncologist</option>
+                    <option value="Psychiatrist">Psychiatrist</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label>Doctor</label>
+                <div className="inputdiv">
+                  <select
+                    name="docID"
+                    value={AddPatient.docID}
+                    onChange={HandleAppointment}
+                    required
+                  >
+                    <option value="">Select doctor</option>
+                    <option value="63d228df1742e138a3727857">
+                      Piyush Agrawal
+                    </option>
+                    <option value="63d2270dfe66e89c9be342f9">
+                      Rajendra Patel
+                    </option>
+                  </select>
                 </div>
               </div>
 
               <div>
                 <label>Patient Blood Group</label>
                 <div className="inputdiv">
-                  <select name="bloodGroup" onChange={HandleAppointment}>
+                  <select
+                    name="bloodGroup"
+                    onChange={HandleAppointment}
+                    required
+                  >
                     <option value="Choose Blood Group">Select</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -325,6 +386,7 @@ const Add_Patient = () => {
                     name="password"
                     value={AddPatient.password}
                     onChange={HandleAppointment}
+                    required
                   />
                 </div>
               </div>

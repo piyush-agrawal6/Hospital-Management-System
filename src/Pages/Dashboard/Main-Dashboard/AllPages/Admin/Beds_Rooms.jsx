@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Table } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { GetBeds } from "../../../../../Redux/Datas/action";
@@ -40,8 +39,7 @@ const Beds_Rooms = () => {
                     <th>Patient</th>
                     <th>Disease</th>
                     <th>Doctor</th>
-                    <th>Edit</th>
-                    <th>discharge</th>
+                    <th>Discharge</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,7 +48,14 @@ const Beds_Rooms = () => {
                       <tr>
                         <td>{ele.roomNumber}</td>
                         <td style={{ marginLeft: "1rem" }}>{ele.bedNumber}</td>
-                        <td>{ele.occupied}</td>
+                        <td
+                          style={{
+                            color:
+                              ele.occupied === "available" ? "green" : "yellow",
+                          }}
+                        >
+                          {ele.occupied}
+                        </td>
                         <td>
                           {ele.patientID
                             ? ele.patientID.patientName
@@ -66,8 +71,22 @@ const Beds_Rooms = () => {
                             ? ele.patientID.docID.docName
                             : "No Data"}
                         </td>
-                        <td>Edit</td>
-                        <td>Discharge</td>
+                        <td>
+                          <button
+                            disabled={ele.occupied === "available"}
+                            style={{
+                              border: "none",
+                              outline: "none",
+                              background: "transparent",
+                              color:
+                                ele.occupied === "available" ? "gray" : "red",
+                              cursor:
+                                ele.occupied === "available" ? "" : "pointer",
+                            }}
+                          >
+                            Discharge
+                          </button>
+                        </td>
                       </tr>
                     );
                   })}

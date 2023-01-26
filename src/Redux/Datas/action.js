@@ -2,7 +2,6 @@ import * as types from "./types";
 import axios from "axios";
 
 // CreateReport
-
 export const CreateReport = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.CREATE_REPORT_REQUEST });
@@ -27,8 +26,8 @@ export const CreateReport = (data) => async (dispatch) => {
     });
   }
 };
-// GET DOCTOR DETAILS
 
+// GET DOCTOR DETAILS
 export const GetDoctorDetails = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_DOCTOR_REQUEST });
@@ -128,7 +127,6 @@ export const CreatePayment = (data) => async (dispatch) => {
 };
 
 //GET BEDS
-
 export const GetBeds = () => async (dispatch) => {
   try {
     dispatch({ type: types.GET_BED_REQUEST });
@@ -152,7 +150,6 @@ export const GetBeds = () => async (dispatch) => {
 };
 
 //CREATE BOOKING
-
 export const CreateBooking = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.CREATE_BOOKING_REQUEST });
@@ -167,24 +164,8 @@ export const CreateBooking = (data) => async (dispatch) => {
   }
 };
 
-//CREATE BOOKING
-
-export const UpdateNurse = (data, id) => async (dispatch) => {
-  try {
-    dispatch({ type: types.EDIT_NURSE_REQUEST });
-    const res = await axios.patch(
-      `https://zany-gray-clam-gear.cyclic.app/nurses/${id}`,
-      data
-    );
-    console.log(res);
-    // dispatch({ type: types.EDIT_NURSE_SUCCESS, payload: res.data.postData });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 //GET BEDS
-
 export const AddBed = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.ADD_BEDS_REQUEST });
@@ -211,7 +192,6 @@ export const AddBed = (data) => async (dispatch) => {
 };
 
 // GET SINGLE BED
-
 export const GetSingleBed = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_SINGLE_BEDS_REQUEST });
