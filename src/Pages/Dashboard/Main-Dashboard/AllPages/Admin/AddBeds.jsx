@@ -17,6 +17,8 @@ const AddBeds = () => {
   };
   const [BedData, setBedData] = useState(InitData);
 
+  const [loading, setloading] = useState(false);
+
   const dispatch = useDispatch();
 
   const HandleAmbuChange = (e) => {
@@ -28,8 +30,9 @@ const AddBeds = () => {
 
   const HandleAmbuSubmit = (e) => {
     e.preventDefault();
-    console.log(BedData);
+    setloading(true);
     dispatch(AddBed(BedData));
+    setloading(false);
     setBedData(InitData);
     notify("Bed Added");
   };
@@ -81,7 +84,7 @@ const AddBeds = () => {
               </div>
 
               <button type="submit" className="formsubmitbutton">
-                Submit
+                {loading ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>

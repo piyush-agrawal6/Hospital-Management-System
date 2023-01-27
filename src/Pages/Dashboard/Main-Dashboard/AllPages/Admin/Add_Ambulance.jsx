@@ -24,6 +24,8 @@ const Add_Ambulance = () => {
     number: "",
   });
 
+  const [loading, setloading] = useState(false);
+
   const dispatch = useDispatch();
 
   const HandleAmbuChange = (e) => {
@@ -35,12 +37,13 @@ const Add_Ambulance = () => {
 
   const HandleAmbuSubmit = (e) => {
     e.preventDefault();
+    setloading(true);
     let data = {
       ...AmbuData,
       type: ambuType,
     };
-    console.log(data);
     dispatch(AmbulanceRegister(data));
+    setloading(false);
     notify("Ambulance Added");
   };
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CommonProblem } from "./MixedObjectData";
 import "./CSS/Book_appointment.css";
 import { useDispatch } from "react-redux";
-import { CreateBooking } from "../../../../../Redux/Datas/action";
+import { AddPatients, CreateBooking } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,7 @@ const notify = (text) => toast(text);
 
 const Book_Appointment = () => {
   const dispatch = useDispatch();
+  const [Loading, setLoading] = useState(false);
 
   const InitValue = {
     patientName: "",
@@ -36,9 +37,19 @@ const Book_Appointment = () => {
     if (BookAppoint.gender === "" || BookAppoint.department === "") {
       return notify("Please fill all the Details");
     }
-    dispatch(CreateBooking(BookAppoint));
-    notify("Appointment Booked");
-    setBookAppoint(InitValue);
+    setLoading(true);
+    dispatch(AddPatients({ ...BookAppoint, patientId: Date.now() })).then(
+      (res) => {
+        let data = {
+          ...BookAppoint,
+          patientId: res.id,
+        };
+        dispatch(CreateBooking(data));
+        notify("Appointment Booked");
+        setLoading(false);
+        setBookAppoint(InitValue);
+      }
+    );
   };
 
   return (
@@ -210,7 +221,7 @@ const Book_Appointment = () => {
               </div>
 
               <button type="submit" className="book_formsubmitbutton">
-                Book Appointment
+                {Loading ? "Loading..." : "Book Appointment"}
               </button>
             </form>
           </div>

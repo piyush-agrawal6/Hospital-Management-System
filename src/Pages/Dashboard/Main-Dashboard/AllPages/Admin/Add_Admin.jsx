@@ -11,6 +11,8 @@ const notify = (text) => toast(text);
 const Add_Admin = () => {
   const { data } = useSelector((store) => store.auth);
 
+  const [loading, setloading] = useState(false);
+
   const InitData = {
     adminName: "",
     age: "",
@@ -32,12 +34,14 @@ const Add_Admin = () => {
 
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
-    console.log(AdminValue);
+    setloading(true);
     dispatch(AdminRegister(AdminValue)).then((res) => {
       if (res.message === "Admin already exists") {
+        setloading(false);
         return notify("Admin Already Exist");
       }
       if (res.message === "error") {
+        setloading(false);
         return notify("Something went wrong, Please try Again");
       }
       notify("Admin Added");
@@ -49,6 +53,7 @@ const Add_Admin = () => {
       };
       console.log(data, "ADMIN REGISTER SUCCESSFULLY");
       dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
+      setloading(false);
       setAdminValue(InitData);
     });
   };
@@ -157,7 +162,7 @@ const Add_Admin = () => {
                 <div className="inputdiv adressdiv">
                   <input
                     type="text"
-                    placeholder="Address line 1"
+                    placeholder="Address"
                     name="address"
                     value={AdminValue.address}
                     onChange={HandleDoctorChange}
@@ -191,30 +196,9 @@ const Add_Admin = () => {
                   />
                 </div>
               </div>
-              {/* <div>
-          <label>Image</label>
-          <div className="inputdiv">
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={beforeUpload}
-              onChange={handleChange}
-              style={{ display: "block" }}
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
-          </div>
-        </div> */}
 
               <button type="submit" className="formsubmitbutton">
-                Submit
+                {loading ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import "./CSS/Add_Doctor.css";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-
 import doctor from "../../../../../img/doctoravatar.png";
-import { message, Upload } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DoctorRegister, SendPassword } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
@@ -16,28 +13,9 @@ const notify = (text) => toast(text);
 const AddDoctor = () => {
   const { data } = useSelector((store) => store.auth);
 
-  const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
-    reader.readAsDataURL(img);
-  };
-
   const dispatch = useDispatch();
 
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
-    }
-    return isJpgOrPng && isLt2M;
-  };
-
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
 
   const initData = {
     docName: "",
@@ -62,11 +40,14 @@ const AddDoctor = () => {
 
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     dispatch(DoctorRegister(DoctorValue)).then((res) => {
       if (res.message === "Doctor already exists") {
+        setLoading(false);
         return notify("Doctor Already Exist");
       }
       if (res.message === "error") {
+        setLoading(false);
         return notify("Something went wrong, Please try Again");
       }
 
@@ -77,30 +58,10 @@ const AddDoctor = () => {
       };
       console.log(data, "DOCTOR REGISTER SUCCESSFULLY");
       dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
+      setLoading(false);
       setDoctorValue(initData);
     });
   };
-
-  const handleChange = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   if (data?.isAuthticated === false) {
     return <Navigate to={"/"} />;
@@ -227,7 +188,7 @@ const AddDoctor = () => {
                 <div className="inputdiv adressdiv">
                   <input
                     type="text"
-                    placeholder="Address line 1"
+                    placeholder="Address"
                     name="address"
                     value={DoctorValue.address}
                     onChange={HandleDoctorChange}
@@ -298,29 +259,8 @@ const AddDoctor = () => {
                   />
                 </div>
               </div>
-              {/* <div>
-          <label>Image</label>
-          <div className="inputdiv">
-            <Upload
-              name="avatar"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              beforeUpload={beforeUpload}
-              onChange={handleChange}
-              style={{ display: "block" }}
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
-          </div>
-        </div> */}
               <button type="submit" className="formsubmitbutton">
-                Submit
+                {loading ? "Loading..." : "Submit"}
               </button>
             </form>
           </div>
