@@ -4,7 +4,7 @@ import nurse from "../../../../../img/nurseavatar.png";
 import { message, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { NurseRegister } from "../../../../../Redux/auth/action";
+import { NurseRegister, SendPassword } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -48,7 +48,6 @@ const Add_Nurse = () => {
     department: "",
     nurseID: Date.now(),
     password: "",
-    image: "imageUrl",
     details: "",
     bloodGroup: "",
   };
@@ -61,9 +60,24 @@ const Add_Nurse = () => {
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
     console.log(NurseValue);
-    dispatch(NurseRegister(NurseValue));
-    setNurseValue(InitData);
-    notify("Nurse Added");
+    dispatch(NurseRegister(NurseValue)).then((res) => {
+      if (res.message === "Nures already exists") {
+        return notify("Nurse Already Exist");
+      }
+      if (res.message === "error") {
+        return notify("Something went wrong, Please try Again");
+      }
+      notify("Nurse Added");
+
+      let data = {
+        email: res.data.email,
+        password: res.data.password,
+        userId: res.data.nurseID,
+      };
+      console.log(data, "NURSE REGISTER SUCCESSFULLY");
+      dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
+      setNurseValue(InitData);
+    });
   };
 
   const handleChange = (info) => {

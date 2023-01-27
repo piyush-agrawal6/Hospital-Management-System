@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { GetAllAppointment } from "../../../../../Redux/Datas/action";
+import {
+  DeleteAppointment,
+  GetAllAppointment,
+} from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 const Check_Appointment = () => {
@@ -19,12 +22,15 @@ const Check_Appointment = () => {
     { title: "Date", dataIndex: "date", key: "date" },
   ];
 
-  const [AllAppointment, setAllAppointment] = useState();
+  const AllAppointment = useSelector((state) => state.data.Appointments);
 
   console.log(AllAppointment);
 
+  const DeleteAppoint = (id) => {
+    disptach(DeleteAppointment(id));
+  };
   useEffect(() => {
-    disptach(GetAllAppointment()).then((res) => setAllAppointment(res));
+    disptach(GetAllAppointment());
   }, []);
 
   if (data?.isAuthticated === false) {
@@ -72,8 +78,9 @@ const Check_Appointment = () => {
                               background: "transparent",
                               cursor: "pointer",
                             }}
+                            onClick={() => DeleteAppoint(ele._id)}
                           >
-                            Resolve
+                            Delete
                           </button>
                         </td>
                       </tr>

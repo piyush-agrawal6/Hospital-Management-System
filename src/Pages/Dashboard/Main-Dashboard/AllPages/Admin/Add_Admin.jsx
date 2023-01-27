@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AdminRegister } from "../../../../../Redux/auth/action";
+import { AdminRegister, SendPassword } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import admin from "../../../../../img/admin.jpg";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,7 +11,7 @@ const notify = (text) => toast(text);
 const Add_Admin = () => {
   const { data } = useSelector((store) => store.auth);
 
-  const [AdminValue, setAdminValue] = useState({
+  const InitData = {
     adminName: "",
     age: "",
     mobile: "",
@@ -22,8 +22,8 @@ const Add_Admin = () => {
     education: "",
     adminID: Date.now(),
     password: "",
-    image: "imageUrl",
-  });
+  };
+  const [AdminValue, setAdminValue] = useState(InitData);
 
   const HandleDoctorChange = (e) => {
     setAdminValue({ ...AdminValue, [e.target.name]: e.target.value });
@@ -33,8 +33,24 @@ const Add_Admin = () => {
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
     console.log(AdminValue);
-    dispatch(AdminRegister(AdminValue));
-    notify("Admin Added");
+    dispatch(AdminRegister(AdminValue)).then((res) => {
+      if (res.message === "Admin already exists") {
+        return notify("Admin Already Exist");
+      }
+      if (res.message === "error") {
+        return notify("Something went wrong, Please try Again");
+      }
+      notify("Admin Added");
+
+      let data = {
+        email: res.data.email,
+        password: res.data.password,
+        userId: res.data.adminID,
+      };
+      console.log(data, "ADMIN REGISTER SUCCESSFULLY");
+      dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
+      setAdminValue(InitData);
+    });
   };
 
   if (data?.isAuthticated === false) {

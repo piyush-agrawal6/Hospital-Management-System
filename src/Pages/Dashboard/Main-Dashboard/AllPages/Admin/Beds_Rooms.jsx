@@ -12,11 +12,12 @@ const Beds_Rooms = () => {
 
   const { beds } = useSelector((state) => state.data);
 
-  const DischargePatient = (id) => {
+  const DischargePatient = (_id) => {
     let data = {
       occupied: "available",
-      _id: id,
+      _id,
     };
+    console.log(data);
     dispatch(dischargePatient(data));
   };
 

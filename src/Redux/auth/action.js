@@ -92,7 +92,8 @@ export const DoctorRegister = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/doctors/register",
       data
     );
-    console.log(res);
+    // console.log(res);
+    return res.data;
     // dispatch({
     //   type: types.REGISTER_DOCTOR_SUCCESS,
     //   payload: {
@@ -120,7 +121,8 @@ export const NurseRegister = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/nurses/register",
       data
     );
-    console.log(res);
+    // console.log(res);
+    return res.data;
     // dispatch({
     //   type: types.REGISTER_NURSE_SUCCESS,
     //   payload: {
@@ -148,7 +150,8 @@ export const AdminRegister = (data) => async (dispatch) => {
       "https://zany-gray-clam-gear.cyclic.app/admin/register",
       data
     );
-    console.log(res);
+    // console.log(res);
+    return res.data;
     // dispatch({
     //   type: types.REGISTER_ADMIN_SUCCESS,
     //   payload: {
@@ -232,6 +235,36 @@ export const UpdateDoctor = (data, id) => async (dispatch) => {
     );
     console.log(res);
     dispatch({ type: types.EDIT_DOCTOR_SUCCESS, payload: res.data.user });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//update doctor
+export const SendPassword = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.EDIT_DOCTOR_REQUEST });
+    const res = await axios.post(
+      `https://zany-gray-clam-gear.cyclic.app/admin/password`,
+      data
+    );
+    // console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//update doctor
+export const forgetPassword = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: types.FORGET_PASSWORD_REQUEST });
+    const res = await axios.post(
+      `https://zany-gray-clam-gear.cyclic.app/admin/forgot`,
+      data
+    );
+    // console.log(res);
+    return res.data;
   } catch (error) {
     console.log(error);
   }

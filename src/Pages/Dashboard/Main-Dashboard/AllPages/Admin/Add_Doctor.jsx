@@ -5,7 +5,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import doctor from "../../../../../img/doctoravatar.png";
 import { message, Upload } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { DoctorRegister } from "../../../../../Redux/auth/action";
+import { DoctorRegister, SendPassword } from "../../../../../Redux/auth/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -52,7 +52,6 @@ const AddDoctor = () => {
     department: "",
     docID: Date.now(),
     password: "",
-    image: "imageUrl",
     details: "",
   };
   const [DoctorValue, setDoctorValue] = useState(initData);
@@ -63,9 +62,23 @@ const AddDoctor = () => {
 
   const HandleDoctorSubmit = (e) => {
     e.preventDefault();
-    dispatch(DoctorRegister(DoctorValue));
-    setDoctorValue(initData);
-    console.log(DoctorValue);
+    dispatch(DoctorRegister(DoctorValue)).then((res) => {
+      if (res.message === "Doctor already exists") {
+        return notify("Doctor Already Exist");
+      }
+      if (res.message === "error") {
+        return notify("Something went wrong, Please try Again");
+      }
+
+      let data = {
+        email: res.data.email,
+        password: res.data.password,
+        userId: res.data.docID,
+      };
+      console.log(data, "DOCTOR REGISTER SUCCESSFULLY");
+      dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
+      setDoctorValue(initData);
+    });
   };
 
   const handleChange = (info) => {

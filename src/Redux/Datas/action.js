@@ -245,18 +245,18 @@ export const EditSingleBed = (data, id) => async (dispatch) => {
 export const dischargePatient = (data) => async (dispatch) => {
   try {
     dispatch({ type: types.DISCHARGE_PATIENT_REQUEST });
-    const res = await axios.patch(
+    const res = await axios.put(
       `https://zany-gray-clam-gear.cyclic.app/beds/discharge`,
       data
     );
     console.log(res);
     // return res.data;
-    // dispatch({
-    // type: types.DISCHARGE_PATIENT_SUCCESS,
-    //   payload: {
-
-    //   },
-    // });
+    dispatch({
+      type: types.DISCHARGE_PATIENT_SUCCESS,
+      payload: {
+        bed: res.data.bed,
+      },
+    });
   } catch (error) {
     // dispatch({
     // type: types.DISCHARGE_PATIENT_ERROR,
@@ -310,11 +310,29 @@ export const GetAllAppointment = () => async (dispatch) => {
       `https://zany-gray-clam-gear.cyclic.app/appointments`
     );
     // console.log(res.data);
-    return res.data;
-    // dispatch({
-    //   type: types.GET_APPOINTMENT_DETAILS_SUCCESS,
-    //   payload: res.data,
-    // });
+    // return res.data;
+    dispatch({
+      type: types.GET_APPOINTMENT_DETAILS_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// DELETE APPOINTMENTS
+export const DeleteAppointment = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.DELETE_APPOINTMENT_REQUEST });
+    const res = await axios.delete(
+      `https://zany-gray-clam-gear.cyclic.app/appointments/${id}`
+    );
+    console.log(res.data);
+    // return res.data;
+    dispatch({
+      type: types.DELETE_APPOINTMENT_SUCCESS,
+      payload: id,
+    });
   } catch (error) {
     console.log(error);
   }
