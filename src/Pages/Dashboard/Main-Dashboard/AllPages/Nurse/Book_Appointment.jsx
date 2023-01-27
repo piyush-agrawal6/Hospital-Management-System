@@ -9,17 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const Book_Appointment = () => {
-  const [showenterProblem, setEnterProblem] = useState("none");
-
-  const onProblemChange = () => {
-    if (BookAppoint.disease !== "Other Problem") {
-      setEnterProblem("flex");
-    } else {
-      setEnterProblem("none");
-    }
-    console.log(BookAppoint.disease);
-  };
-
   const dispatch = useDispatch();
 
   const InitValue = {
@@ -28,7 +17,7 @@ const Book_Appointment = () => {
     age: "",
     gender: "",
     mobile: "",
-    problem: "",
+    disease: "",
     address: "",
     department: "",
     date: "",
@@ -43,6 +32,10 @@ const Book_Appointment = () => {
 
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
+    console.log(BookAppoint);
+    if (BookAppoint.gender === "" || BookAppoint.department === "") {
+      return notify("Please fill all the Details");
+    }
     dispatch(CreateBooking(BookAppoint));
     notify("Appointment Booked");
     setBookAppoint(InitValue);
@@ -121,10 +114,9 @@ const Book_Appointment = () => {
                 <label>Type of Disease</label>
                 <div className="inputdiv">
                   <select
-                    name="problem"
-                    value={BookAppoint.problem}
+                    name="disease"
+                    value={BookAppoint.disease}
                     onChange={(e) => {
-                      onProblemChange();
                       HandleAppointment(e);
                     }}
                     required
@@ -142,19 +134,7 @@ const Book_Appointment = () => {
               </div>
 
               {/* ENTER SAMPLE DISEASE */}
-              <div style={{ display: showenterProblem }}>
-                <label></label>
-                <div className="inputdiv">
-                  <input
-                    type="text"
-                    placeholder="Enter Your Problem"
-                    name="problem"
-                    value={BookAppoint.problem}
-                    onChange={HandleAppointment}
-                    required
-                  />
-                </div>
-              </div>
+
               {/* ADDRESS SECTION  */}
               <div>
                 <label>Address</label>

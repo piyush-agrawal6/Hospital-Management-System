@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 const notify = (text) => toast(text);
 
 const DLogin = () => {
+  const [Loading, setLoading] = useState(false);
   const [placement, SetPlacement] = useState("Nurse");
   const [formvalue, setFormvalue] = useState({
     ID: "",
@@ -28,6 +29,7 @@ const DLogin = () => {
   const navigate = useNavigate();
   const HandleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (formvalue.ID !== "" && formvalue.password !== "") {
       if (placement === "Nurse") {
         let data = {
@@ -37,12 +39,17 @@ const DLogin = () => {
         dispatch(NurseLogin(data)).then((res) => {
           if (res.message === "Successful") {
             notify("Login Successful");
+            setLoading(false);
             return navigate("/dashboard");
           }
           if (res.message === "Wrong credentials") {
+            setLoading(false);
+
             notify("Wrong credentials");
           }
           if (res.message === "Error") {
+            setLoading(false);
+
             notify("Something went Wrong, Please Try Again");
           }
         });
@@ -55,12 +62,18 @@ const DLogin = () => {
         dispatch(DoctorLogin(data)).then((res) => {
           if (res.message === "Successful") {
             notify("Login Successful");
+            setLoading(false);
+
             return navigate("/dashboard");
           }
           if (res.message === "Wrong credentials") {
+            setLoading(false);
+
             notify("Wrong credentials");
           }
           if (res.message === "Error") {
+            setLoading(false);
+
             notify("Something went Wrong, Please Try Again");
           }
         });
@@ -72,12 +85,18 @@ const DLogin = () => {
         dispatch(AdminLogin(data)).then((res) => {
           if (res.message === "Successful") {
             notify("Login Successful");
+            setLoading(false);
+
             return navigate("/dashboard");
           }
           if (res.message === "Wrong credentials") {
+            setLoading(false);
+
             notify("Wrong credentials");
           }
           if (res.message === "Error") {
+            setLoading(false);
+
             notify("Something went Wrong, Please Try Again");
           }
         });
@@ -137,7 +156,7 @@ const DLogin = () => {
                 onChange={Handlechange}
                 required
               />
-              <button type="submit">Login</button>
+              <button type="submit">{Loading ? "Loading..." : "Submit"}</button>
             </form>
           </div>
         </div>

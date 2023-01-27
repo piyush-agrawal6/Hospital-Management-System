@@ -301,3 +301,21 @@ export const GetAllData = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+// GET ALL APPOINTMENT DETAILS
+export const GetAllAppointment = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_APPOINTMENT_DETAILS_REQUEST });
+    const res = await axios.get(
+      `https://zany-gray-clam-gear.cyclic.app/appointments`
+    );
+    // console.log(res.data);
+    return res.data;
+    // dispatch({
+    //   type: types.GET_APPOINTMENT_DETAILS_SUCCESS,
+    //   payload: res.data,
+    // });
+  } catch (error) {
+    console.log(error);
+  }
+};

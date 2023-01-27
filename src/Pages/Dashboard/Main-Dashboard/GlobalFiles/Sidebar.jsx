@@ -202,18 +202,6 @@ const Sidebar = () => {
               </Link>
             ) : null} */}
 
-            <Link className="link" activeclassname="active" to={"/rooms"}>
-              <div className="icon">
-                <MdBedroomChild className="mainIcon" />
-              </div>
-              <div
-                style={{ display: isOpen ? "block" : "none" }}
-                className="link_text"
-              >
-                Beds
-              </div>
-            </Link>
-
             {user?.userType === "doctor" ? (
               <Link
                 className="link"
@@ -231,6 +219,17 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
+            <Link className="link" activeclassname="active" to={"/rooms"}>
+              <div className="icon">
+                <MdBedroomChild className="mainIcon" />
+              </div>
+              <div
+                style={{ display: isOpen ? "block" : "none" }}
+                className="link_text"
+              >
+                Beds
+              </div>
+            </Link>
             {user?.userType === "doctor" ? (
               <Link
                 className="link"
@@ -265,7 +264,7 @@ const Sidebar = () => {
                 </div>
               </Link>
             ) : null}
-            {user?.userType === "doctor" ? (
+            {/* {user?.userType === "doctor" ? (
               <Link
                 className="link"
                 activeclassname="active"
@@ -281,7 +280,7 @@ const Sidebar = () => {
                   Patients
                 </div>
               </Link>
-            ) : null}
+            ) : null} */}
 
             <Link
               className="LogOutPath link"

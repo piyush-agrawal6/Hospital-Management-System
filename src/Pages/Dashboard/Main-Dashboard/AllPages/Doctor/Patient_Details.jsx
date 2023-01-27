@@ -39,7 +39,7 @@ const Patient_Details = () => {
     return <Navigate to={"/"} />;
   }
 
-  if (data?.user.userType !== "admin") {
+  if (data?.user.userType !== "doctor") {
     return <Navigate to={"/dashboard"} />;
   }
 

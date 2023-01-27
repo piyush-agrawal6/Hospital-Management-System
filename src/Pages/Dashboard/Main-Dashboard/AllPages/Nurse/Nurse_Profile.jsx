@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "../Doctor/CSS/Doctor_Profile.css";
-import { AiOutlineUser } from "react-icons/ai";
+import { BiTime } from "react-icons/bi";
 import { GiMeditation } from "react-icons/gi";
-import { AiFillCalendar } from "react-icons/ai";
+import { AiFillCalendar, AiFillEdit } from "react-icons/ai";
 import { MdBloodtype } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
-import { BsHouseFill } from "react-icons/bs";
+import { BsHouseFill, BsGenderAmbiguous } from "react-icons/bs";
 import { MdOutlineCastForEducation } from "react-icons/md";
-import { FaRegHospital, FaMapMarkedAlt } from "react-icons/fa";
+import { FaRegHospital, FaMapMarkedAlt, FaBirthdayCake } from "react-icons/fa";
 import Sidebar from "../../GlobalFiles/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, message, Modal } from "antd";
 import { UpdateNurse } from "../../../../../Redux/auth/action";
+import docimg from "../../../../../img/profile.png";
+import "./CSS/Profiles.css";
 
 const Nurse_Profile = () => {
   const {
@@ -19,14 +21,6 @@ const Nurse_Profile = () => {
   } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
-  let commonStyling = {
-    display: "flex",
-    justifyContent: "left",
-    gap: "10px",
-    alignItems: "center",
-    padding: "10px",
-  };
 
   const [formData, setFormData] = useState({
     nurseName: user.nurseName,
@@ -81,40 +75,33 @@ const Nurse_Profile = () => {
         <Sidebar />
         <div className="AfterSideBar">
           <div className="maindoctorProfile">
-            <div className="firstBox">
-              <div
-                style={{
-                  border: "1px solid",
-                  borderRadius: "10rem",
-                  width: "45%",
-                  margin: "auto",
-                  marginTop: "10px",
-                  marginBottom: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <AiOutlineUser style={{ fontSize: "10rem", padding: "10px" }} />
+            <div className="firstBox doctorfirstdiv">
+              <div>
+                <img src={user?.image} alt="docimg" />
               </div>
-              <div style={commonStyling}>
-                <GiMeditation />
+              <hr />
+              <div className="singleitemdiv">
+                <GiMeditation className="singledivicons" />
                 <p>{user?.nurseName}</p>
               </div>
-              <div style={commonStyling}>
-                <AiFillCalendar />
-                <p>{user?.DOB}</p>
-              </div>
-              <div style={commonStyling}>
-                <MdBloodtype />
+              <div className="singleitemdiv">
+                <MdBloodtype className="singledivicons" />
                 <p>{user?.bloodGroup}</p>
               </div>
-              <div style={commonStyling}>
-                <BsFillTelephoneFill />
+              <div className="singleitemdiv">
+                <FaBirthdayCake className="singledivicons" />
+                <p>{user?.DOB}</p>
+              </div>
+              <div className="singleitemdiv">
+                <BsFillTelephoneFill className="singledivicons" />
                 <p>{user?.mobile}</p>
               </div>
-              <div onClick={showModal}>
-                <BsFillTelephoneFill />
-                Edit profile
+              <div className="singleitemdiv">
+                <button onClick={showModal}>
+                  {" "}
+                  <AiFillEdit />
+                  Edit profile
+                </button>
               </div>
 
               <Modal
@@ -190,18 +177,22 @@ const Nurse_Profile = () => {
                 <h2 style={{ textAlign: "center", marginTop: "10px" }}>
                   Other Info
                 </h2>
-                <div style={commonStyling}>
-                  <BsHouseFill />
+                <div className="singleitemdiv">
+                  <BsGenderAmbiguous className="singledivicons" />
                   <p>{user?.gender}</p>
                 </div>
-                <div style={commonStyling}>
-                  <BsHouseFill />
+                <div className="singleitemdiv">
+                  <AiFillCalendar className="singledivicons" />
                   <p>{user?.age}</p>
                 </div>
 
-                <div style={commonStyling}>
-                  <MdOutlineCastForEducation />
+                <div className="singleitemdiv">
+                  <MdOutlineCastForEducation className="singledivicons" />
                   <p>{user?.education}</p>
+                </div>
+                <div className="singleitemdiv">
+                  <BsHouseFill className="singledivicons" />
+                  <p>{user?.address}</p>
                 </div>
               </div>
               {/* ***********  Third Div ******************** */}
@@ -209,12 +200,16 @@ const Nurse_Profile = () => {
                 <h2 style={{ textAlign: "center", marginTop: "10px" }}>
                   Hospital Details
                 </h2>
-                <div style={commonStyling}>
-                  <FaRegHospital />
+                <div className="singleitemdiv">
+                  <BiTime className="singledivicons" />
+                  <p>09:00 AM - 20:00 PM (TIMING)</p>
+                </div>
+                <div className="singleitemdiv">
+                  <FaRegHospital className="singledivicons" />
                   <p>Apollo hospitals</p>
                 </div>
-                <div style={commonStyling}>
-                  <FaMapMarkedAlt />
+                <div className="singleitemdiv">
+                  <FaMapMarkedAlt className="singledivicons" />
                   <p>
                     Sri Aurobindo Marg, Ansari Nagar, Ansari Nagar East, New
                     Delhi.

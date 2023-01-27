@@ -21,6 +21,7 @@ const FrontPage = () => {
     { title: "Disease", dataIndex: "disease", key: "disease" },
     { title: "Blood Group", dataIndex: "bloodGroup", key: "bloodGroup" },
     { title: "Department", dataIndex: "department", key: "department" },
+    { title: "Email", dataIndex: "email", key: "email" },
   ];
 
   const { patients } = useSelector((store) => store.data.patients);

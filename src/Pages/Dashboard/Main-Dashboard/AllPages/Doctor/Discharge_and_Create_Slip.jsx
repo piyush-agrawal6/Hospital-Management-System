@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { CreatePayment, CreateReport } from "../../../../../Redux/Datas/action";
 import Sidebar from "../../GlobalFiles/Sidebar";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+const notify = (text) => toast(text);
 
 const Discharge_and_Create_Slip = () => {
   const { data } = useSelector((store) => store.auth);
@@ -21,7 +24,7 @@ const Discharge_and_Create_Slip = () => {
     setmed({ ...med, [e.target.name]: e.target.value });
   };
 
-  const [ReportValue, setReportValue] = useState({
+  const InitData = {
     docName: "",
     docDepartment: "",
     patientAge: "",
@@ -29,6 +32,7 @@ const Discharge_and_Create_Slip = () => {
     patientMobile: "",
     patientBloodGroup: "",
     patientGender: "",
+    email: "",
     patientDisease: "",
     patientTemperature: "",
     patientWeight: "",
@@ -39,7 +43,9 @@ const Discharge_and_Create_Slip = () => {
     date: "",
     time: "",
     medicines: [],
-  });
+  };
+
+  const [ReportValue, setReportValue] = useState(InitData);
 
   const HandleReportChange = (e) => {
     setReportValue({ ...ReportValue, [e.target.name]: e.target.value });
@@ -60,10 +66,12 @@ const Discharge_and_Create_Slip = () => {
     console.log(data);
     try {
       dispatch(CreateReport(data)).then((res) => {
-        let data = {
-          reportID: res.report._id,
-        };
-        dispatch(CreatePayment(data));
+        if (res.message === "Report successfully created") {
+          notify("Report Created Sucessfully");
+          ReportValue(InitData);
+        } else {
+          notify("Something went Wrong");
+        }
       });
     } catch (error) {
       console.log(error);
@@ -79,6 +87,7 @@ const Discharge_and_Create_Slip = () => {
   }
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <Sidebar />
         <div className="AfterSideBar">
@@ -120,7 +129,6 @@ const Discharge_and_Create_Slip = () => {
                     name="docMobile"
                     value={ReportValue.docMobile}
                     onChange={HandleReportChange}
-                    required
                   />
                 </div>
               </div>
@@ -133,6 +141,7 @@ const Discharge_and_Create_Slip = () => {
                     name="patientName"
                     value={ReportValue.patientName}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -145,6 +154,7 @@ const Discharge_and_Create_Slip = () => {
                     name="patientAge"
                     value={ReportValue.patientAge}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -157,6 +167,20 @@ const Discharge_and_Create_Slip = () => {
                     name="patientMobile"
                     value={ReportValue.patientMobile}
                     onChange={HandleReportChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label>Email</label>
+                <div className="inputdiv">
+                  <input
+                    type="email"
+                    placeholder="abc@abc"
+                    name="email"
+                    value={ReportValue.email}
+                    onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -182,6 +206,7 @@ const Discharge_and_Create_Slip = () => {
                     name="patientBloodGroup"
                     value={ReportValue.patientBloodGroup}
                     onChange={HandleReportChange}
+                    required
                   >
                     <option value="Choose Blood Group">Select</option>
                     <option value="A+">A+</option>
@@ -204,6 +229,7 @@ const Discharge_and_Create_Slip = () => {
                     name="patientDisease"
                     value={ReportValue.patientDisease}
                     onChange={HandleReportChange}
+                    required
                   />
                 </div>
               </div>
@@ -236,7 +262,7 @@ const Discharge_and_Create_Slip = () => {
                 <label>Patient BP</label>
                 <div className="inputdiv adressdiv">
                   <input
-                    type="text"
+                    type="number"
                     placeholder="140/90 mmHg"
                     name="patientBP"
                     value={ReportValue.patientBP}
@@ -248,7 +274,7 @@ const Discharge_and_Create_Slip = () => {
                 <label>Patient Glucose</label>
                 <div className="inputdiv">
                   <input
-                    type="text"
+                    type="number"
                     placeholder="99 mg/dL"
                     name="patientGlucose"
                     value={ReportValue.patientGlucose}
