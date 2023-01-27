@@ -13,12 +13,12 @@ const Book_Appointment = () => {
 
   const InitValue = {
     patientName: "",
-    patientID: Date.now(),
     age: "",
     gender: "",
     mobile: "",
     disease: "",
     address: "",
+    email: "",
     department: "",
     date: "",
     time: "",
@@ -109,6 +109,19 @@ const Book_Appointment = () => {
                   />
                 </div>
               </div>
+              <div>
+                <label>Email</label>
+                <div className="inputdiv">
+                  <input
+                    type="email"
+                    placeholder="example@email.com"
+                    name="email"
+                    value={BookAppoint.email}
+                    onChange={HandleAppointment}
+                    required
+                  />
+                </div>
+              </div>
               {/* PROBLEM PLACEHOLDER */}
               <div>
                 <label>Type of Disease</label>
@@ -136,6 +149,7 @@ const Book_Appointment = () => {
               {/* ENTER SAMPLE DISEASE */}
 
               {/* ADDRESS SECTION  */}
+
               <div>
                 <label>Address</label>
                 <div className="inputdiv">
