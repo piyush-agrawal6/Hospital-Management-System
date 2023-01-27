@@ -337,3 +337,21 @@ export const DeleteAppointment = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+// GET ALL REPORTS
+export const GetAllReports = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_REPORTS_REQUEST });
+    const res = await axios.get(
+      `https://zany-gray-clam-gear.cyclic.app/reports`
+    );
+    // console.log(res.data);
+    return res.data;
+    // dispatch({
+    //   type: types.DELETE_APPOINTMENT_SUCCESS,
+    //   payload: id,
+    // });
+  } catch (error) {
+    console.log(error);
+  }
+};

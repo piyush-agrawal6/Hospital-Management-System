@@ -68,10 +68,11 @@ const Discharge_and_Create_Slip = () => {
     try {
       setLoading(true);
       dispatch(CreateReport(data)).then((res) => {
+        console.log(res);
         if (res.message === "Report successfully created") {
           notify("Report Created Sucessfully");
           setLoading(false);
-          ReportValue(InitData);
+          setReportValue(InitData);
         } else {
           setLoading(false);
           notify("Something went Wrong");

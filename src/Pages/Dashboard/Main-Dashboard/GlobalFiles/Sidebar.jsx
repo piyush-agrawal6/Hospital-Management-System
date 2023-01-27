@@ -8,7 +8,7 @@ import { BsBookmarkPlus, BsFillBookmarkCheckFill } from "react-icons/bs";
 import { BiDetail } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaHospitalUser } from "react-icons/fa";
-import { TbListDetails } from "react-icons/tb";
+import { TbReportMedical } from "react-icons/tb";
 import { MdBedroomChild } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ImMenu } from "react-icons/im";
@@ -230,6 +230,19 @@ const Sidebar = () => {
                 Beds
               </div>
             </Link>
+            {user?.userType === "doctor" ? (
+              <Link className="link" activeclassname="active" to={"/reports"}>
+                <div className="icon">
+                  <TbReportMedical className="mainIcon" />
+                </div>
+                <div
+                  style={{ display: isOpen ? "block" : "none" }}
+                  className="link_text"
+                >
+                  Reports
+                </div>
+              </Link>
+            ) : null}
             {user?.userType === "doctor" ? (
               <Link
                 className="link"
