@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Radio } from "antd";
 import banner from "../../../img/banner.png";
 import profile from "../../../img/profile.png";
+import admin from "../../../img/admin.jpg";
 import "./DLogin.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -136,7 +137,7 @@ const DLogin = () => {
             </Radio.Group>
           </div>
           <div className="Profileimg">
-            <img src={profile} alt="profile" />
+            <img src={admin} alt="profile" />
           </div>
           <div>
             <form onSubmit={HandleSubmit}>
