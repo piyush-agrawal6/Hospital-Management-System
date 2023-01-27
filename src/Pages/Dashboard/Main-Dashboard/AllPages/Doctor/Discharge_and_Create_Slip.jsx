@@ -10,6 +10,8 @@ const notify = (text) => toast(text);
 const Discharge_and_Create_Slip = () => {
   const { data } = useSelector((store) => store.auth);
 
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
   const initmed = {
     medName: "",
@@ -63,13 +65,15 @@ const Discharge_and_Create_Slip = () => {
       ...ReportValue,
       medicines,
     };
-    console.log(data);
     try {
+      setLoading(true);
       dispatch(CreateReport(data)).then((res) => {
         if (res.message === "Report successfully created") {
           notify("Report Created Sucessfully");
+          setLoading(false);
           ReportValue(InitData);
         } else {
+          setLoading(false);
           notify("Something went Wrong");
         }
       });
@@ -348,7 +352,7 @@ const Discharge_and_Create_Slip = () => {
                 className="formsubmitbutton bookingbutton"
                 onClick={HandleReportSubmit}
               >
-                Generate Report
+                {loading ? "Loading..." : "Generate Report"}
               </button>
             </form>
           </div>
