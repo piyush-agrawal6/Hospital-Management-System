@@ -33,7 +33,7 @@ const Book_Appointment = () => {
 
   const HandleOnsubmitAppointment = (e) => {
     e.preventDefault();
-    console.log(BookAppoint);
+
     if (BookAppoint.gender === "" || BookAppoint.department === "") {
       return notify("Please fill all the Details");
     }

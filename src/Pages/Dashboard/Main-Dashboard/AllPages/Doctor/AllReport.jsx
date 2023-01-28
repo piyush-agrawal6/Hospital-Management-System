@@ -12,7 +12,6 @@ const AllReport = () => {
       setReport(res);
     });
   }, []);
-  console.log(Report);
   return (
     <>
       <div className="container">
