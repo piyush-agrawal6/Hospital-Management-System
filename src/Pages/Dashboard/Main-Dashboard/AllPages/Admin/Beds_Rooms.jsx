@@ -17,7 +17,6 @@ const Beds_Rooms = () => {
       occupied: "available",
       _id,
     };
-    console.log(data);
     dispatch(dischargePatient(data));
   };
 
