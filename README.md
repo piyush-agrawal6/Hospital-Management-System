@@ -107,7 +107,7 @@ Server - https://github.com/piyush-agrawal6/HMS-Backend
 
 ## Presentation
 
-Presentation -
+Link -
 
 ## Team Members / Contributors
 
