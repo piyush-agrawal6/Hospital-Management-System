@@ -28,10 +28,9 @@ Start the server
 
 # Hospital Management System
 
-This a software to control all the management related to a hospital , like admitting patient , booking bed , calling a ambulance , managing payment and more.
+This a a website, where we can control all the management related to a hospital online, like admitting patient, booking bed, booking ambulance, managing payment and more.
 
-<img src="https://i.ibb.co/4WkwWc2/logo.png" width="500" height="190px">
-
+![1](https://user-images.githubusercontent.com/100460788/215811132-40070d36-862a-4154-adc0-903c6fa65394.jpg)
 
 ## Tech Stack
 
@@ -47,42 +46,72 @@ This a software to control all the management related to a hospital , like admit
 - **Node Js**
 - **Mongo DB**
 - **Express Js**
-- **Render**
 - **JWT**
+- **Nodemailer**
 
+## Deployment
 
-## 🔗 Links
-Client - https://brain-labs.netlify.app/
+- **Client**  (Netlify)
+- **Server** - (Cyclic)
 
-Server - https://github.com/piyush-agrawal6/HMS-Backend
+## Credentials
+
+ID - 100
+
+Password - masai
 
 ## Features
 
 - Admin controls
-- CRUD Operations
-- Admit Patients
-- Payment
-- Appointment booking
+- Admitting Patients
+- Booking beds and ambulance
+- Creating appointments
+- Generating reports 
+- Overall control of hospital
 
+## 🔗 Links
+
+Client - https://hm-system.netlify.app/
+
+Server - https://github.com/piyush-agrawal6/HMS-Backend
 
 ## Screenshots
 
-
 1.Dashboard
 
-![App Screenshot](https://i.ibb.co/1K6N1Hk/21-12-2022-12-45-28-REC.png)
+![31 01 2023_21 16 55_REC](https://user-images.githubusercontent.com/100460788/215808721-eb9f8778-53df-43fe-a1ab-662c0ff78c4f.png)
 
+2.Profile
 
-## Blog / Presentation
+![31 01 2023_21 17 08_REC](https://user-images.githubusercontent.com/100460788/215808736-31e6dd9e-e5f3-4a48-9bbf-d505c27579c2.png)
 
-Presentation -
+3.Beds
 
-Blog -
+![31 01 2023_21 17 21_REC](https://user-images.githubusercontent.com/100460788/215808740-af93a793-4a82-44c5-9eab-1bc11a6a6068.png)
 
+4.Book appointment
+
+![31 01 2023_21 17 43_REC](https://user-images.githubusercontent.com/100460788/215808744-417cbac9-eb6c-41d0-a4a9-414bb91cd03e.png)
+
+5.Add profile
+
+![31 01 2023_21 18 12_REC](https://user-images.githubusercontent.com/100460788/215808745-9813e61d-a13c-447f-b3c9-1f910ba8531f.png)
+
+6.Add ambulance
+
+![31 01 2023_21 18 30_REC](https://user-images.githubusercontent.com/100460788/215808748-9bb5d05d-afb1-41a3-9427-38089a28d0ed.png)
+
+7.Login Page
+
+![31 01 2023_21 15 44_REC](https://user-images.githubusercontent.com/100460788/215808752-4ebfb582-1db0-45e4-ac53-a87a5f1b75ea.png)
+
+## Presentation
+
+Link -
 
 ## Team Members / Contributors
 
 - [@Piyush Agrawal](https://github.com/piyush-agrawal6)
-- [@Udhaya Prakash](https://github.com/udhai-20)
 - [@Rajendra Patel](https://github.com/centauricoder01)
+- [@Salman Ajani](https://github.com/SalmanAjani)
 

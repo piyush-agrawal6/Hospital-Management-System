@@ -24,8 +24,6 @@ const Check_Appointment = () => {
 
   const AllAppointment = useSelector((state) => state.data.Appointments);
 
-  console.log(AllAppointment);
-
   const DeleteAppoint = (id) => {
     disptach(DeleteAppointment(id));
   };

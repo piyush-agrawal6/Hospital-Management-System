@@ -51,7 +51,6 @@ const Add_Admin = () => {
         password: res.data.password,
         userId: res.data.adminID,
       };
-      console.log(data, "ADMIN REGISTER SUCCESSFULLY");
       dispatch(SendPassword(data)).then((res) => notify("Account Detais Sent"));
       setloading(false);
       setAdminValue(InitData);

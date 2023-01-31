@@ -29,7 +29,6 @@ const Add_Patient = () => {
 
   const { data } = useSelector((store) => store.auth);
 
-  console.log(data);
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
