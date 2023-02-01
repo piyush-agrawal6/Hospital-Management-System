@@ -109,7 +109,7 @@ Server - https://github.com/piyush-agrawal6/HMS-Backend
 
 ## Presentation
 
-Link -
+Link - <a href="https://drive.google.com/file/d/1xwcSsjdl6QHnJ-JXl11moBAwSqSQFRjh/view?usp=sharing" alt="presentation">Drive</a>
 
 ## Team Members / Contributors
 
